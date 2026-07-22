@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tunes to Know</title>
+  <meta name="description" content="Essential songs to know — and to learn on bass and guitar." />
+  <link rel="icon" href="data:image/svg+xml,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22><text%20y=%22.9em%22%20font-size=%2290%22>&#127928;</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="site-title">🎸 Tunes to Know</h1>
+    <p class="site-subtitle">A handful of songs worth knowing — and worth learning on bass and guitar.</p>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Song categories">
+    <button class="tab" role="tab" id="tab-know" aria-controls="panel-know" aria-selected="true" data-tab="know">To Know</button>
+    <button class="tab" role="tab" id="tab-bass" aria-controls="panel-bass" aria-selected="false" data-tab="bass">Learn on Bass</button>
+    <button class="tab" role="tab" id="tab-guitar" aria-controls="panel-guitar" aria-selected="false" data-tab="guitar">Learn on Guitar</button>
+  </nav>
+
+  <main class="content">
+    <section class="panel" role="tabpanel" id="panel-know" aria-labelledby="tab-know"></section>
+    <section class="panel" role="tabpanel" id="panel-bass" aria-labelledby="tab-bass" hidden></section>
+    <section class="panel" role="tabpanel" id="panel-guitar" aria-labelledby="tab-guitar" hidden></section>
+    <noscript>
+      <p class="empty">Please enable JavaScript to see the songs.</p>
+    </noscript>
+  </main>
+
+  <footer class="site-footer">
+    <p>Press play, listen close. 🎧</p>
+  </footer>
+
+  <script src="songs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
