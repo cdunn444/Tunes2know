@@ -126,15 +126,25 @@ a { color: inherit; }
 .content { max-width: var(--max-width); margin: 0 auto; padding: 1rem 1.25rem 2rem; }
 .song-list { list-style: none; margin: 0; padding: 0; }
 
+/* Liquid-glass cards: translucent tint + backdrop blur lets the fixed orange
+   glow behind the page pull through, strongest near the top of the viewport. */
 .song {
-  background: var(--bg-elev);
-  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),   /* specular top edge */
+    0 10px 30px rgba(0, 0, 0, 0.35);
   border-radius: var(--radius);
   padding: 1.15rem 1.25rem 1.35rem;
   margin-bottom: 1rem;
-  transition: background-color .15s ease;
+  transition: background .15s ease, border-color .15s ease;
 }
-.song:hover { background: var(--bg-elev-hover); }
+.song:hover {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05));
+  border-color: rgba(255, 255, 255, 0.18);
+}
 
 .song-head { display: flex; align-items: center; gap: .9rem; margin-bottom: .85rem; }
 .song-num {
@@ -173,8 +183,8 @@ a { color: inherit; }
 .song-placeholder {
   display: flex; align-items: center; gap: .5rem;
   height: 152px; padding: 0 1rem; margin-bottom: 1rem;
-  border: 1px dashed var(--border); border-radius: var(--radius);
-  background: #141414; color: var(--text-muted); font-size: .92rem;
+  border: 1px dashed rgba(255, 255, 255, 0.15); border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.25); color: var(--text-muted); font-size: .92rem;
 }
 
 /* ---- Footer ------------------------------------------------------------- */
