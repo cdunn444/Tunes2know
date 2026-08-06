@@ -14,16 +14,16 @@
 </head>
 <body>
   <nav class="switcher" aria-label="Instrument">
-    <div class="switch-stage" id="switch-stage" data-state="expanded">
-      <button class="record" id="record-toggle" aria-label="Switch side" hidden>
+    <div class="switch-stage" id="switch-stage" data-state="open">
+      <div role="tablist" aria-label="Sides">
+        <button class="side-option side-left" role="tab" id="tab-guitar" aria-controls="panel-guitar" aria-selected="false">Guitar</button>
+        <button class="side-option side-right" role="tab" id="tab-bass" aria-controls="panel-bass" aria-selected="true">Bass</button>
+      </div>
+      <button class="record" id="record-toggle" aria-expanded="true" aria-label="Side menu">
         <span class="record-disc">
-          <span class="record-label"><span class="record-letter" id="record-letter">A</span></span>
+          <span class="record-label"><span class="record-letter" id="record-letter">B</span></span>
         </span>
       </button>
-      <div class="seg" role="tablist">
-        <button class="seg-btn" role="tab" id="tab-bass" aria-controls="panel-bass" aria-selected="true">Side A · Bass</button>
-        <button class="seg-btn" role="tab" id="tab-guitar" aria-controls="panel-guitar" aria-selected="false">Side B · Guitar</button>
-      </div>
     </div>
   </nav>
 

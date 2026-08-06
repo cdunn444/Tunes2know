@@ -30,7 +30,7 @@ const SECTIONS = {
 
   /* ---- Side A · Bass ----------------------------------------------------- */
   bass: {
-    tabLabel: "Side A · Bass",
+    tabLabel: "Bass",
     subhead: "Master your bass face while learning these essential grooves. Some are hard to learn but all are fun to play!",
     playlist: "https://open.spotify.com/playlist/6DWblW9d44zSp3zHBcA3KR",
     songs: [
@@ -115,7 +115,7 @@ const SECTIONS = {
   /* Placeholder scaffold: replace with the real 25 guitar songs (same shape
      as the bass list above), and add the guitar playlist URL. */
   guitar: {
-    tabLabel: "Side B · Guitar",
+    tabLabel: "Guitar",
     subhead: "Turn up the volume to 11 with these classic guitar tracks. Learn a handful of chords and you'll be able to play most songs out there!",
     playlist: "https://open.spotify.com/playlist/1wHuNOuYScGEJJBRBZUbM9",
     /* Shown as a card above the songs on this side.

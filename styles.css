@@ -134,42 +134,72 @@ a { color: inherit; }
   padding: 0 1rem;
   margin: 1.1rem 0 0;
 }
-/* Stage holds the two forms of the control — the little spinning record
-   (collapsed) and the full segmented pill (expanded) — stacked and
-   cross-faded. JS drives data-state and the stage width. */
+/* The record is a floating menu hub: the A side (Guitar) slides out from
+   its left, the B side (Bass) from its right. The stage never changes size —
+   the record stays centered and the options emerge from behind it. */
 .switch-stage {
   position: relative;
-  height: 52px;
-  min-width: 52px;
-  transition: width .28s ease;
+  height: 60px;
+  width: 60px;
 }
-.switch-stage .record,
-.switch-stage .seg {
+.switch-stage .record {
   position: absolute;
   left: 50%;
   top: 50%;
-  transition: opacity .22s ease, transform .22s ease, visibility 0s linear .22s;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
-.switch-stage[data-state="collapsed"] .seg,
-.switch-stage[data-state="expanded"] .record {
+.side-option {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  font-size: .9rem;
+  color: var(--text-muted);
+  padding: .5rem 1.15rem;
+  min-height: 42px;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: transform .28s cubic-bezier(.2, .8, .3, 1.1), opacity .2s ease,
+    background .15s ease, color .15s ease, visibility 0s linear .28s;
+}
+.side-option:hover { color: var(--text); }
+.side-option[aria-selected="true"] { background: var(--accent-2); color: var(--bg); }
+.side-option:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Closed: tucked behind the record. Open: slid out to either side. */
+.switch-stage[data-state="closed"] .side-option {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translate(-50%, -50%) scale(.55);
+  transform: translate(-50%, -50%) scale(.5);
 }
-.switch-stage[data-state="collapsed"] .record,
-.switch-stage[data-state="expanded"] .seg {
+.switch-stage[data-state="open"] .side-option {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -50%) scale(1);
-  transition: opacity .22s ease, transform .22s ease, visibility 0s;
+  transition: transform .28s cubic-bezier(.2, .8, .3, 1.1), opacity .2s ease,
+    background .15s ease, color .15s ease, visibility 0s;
 }
+.switch-stage[data-state="open"] .side-left  { transform: translate(calc(-100% - 44px), -50%); }
+.switch-stage[data-state="open"] .side-right { transform: translate(44px, -50%); }
 
 /* The record: warm vinyl grooves, a tan label bearing the side letter,
    spinning slowly like it's on a turntable. */
 .record {
-  width: 52px;
-  height: 52px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.14);
   padding: 0;
@@ -208,8 +238,8 @@ a { color: inherit; }
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: var(--accent-2);
   display: flex;
@@ -218,7 +248,7 @@ a { color: inherit; }
 }
 .record-letter {
   font-family: var(--font-display);
-  font-size: .95rem;
+  font-size: 1.05rem;
   line-height: 1;
   color: var(--bg);
 }
@@ -226,43 +256,8 @@ a { color: inherit; }
 @keyframes record-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) {
   .record-disc { animation: none; }
-  .switch-stage,
-  .switch-stage .record,
-  .switch-stage .seg { transition: none; }
+  .side-option { transition: background .15s ease, color .15s ease; }
 }
-
-.seg {
-  display: flex;
-  gap: .25rem;
-  padding: .3rem;
-  white-space: nowrap;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  backdrop-filter: blur(18px) saturate(160%);
-  border-radius: 999px;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    0 10px 30px rgba(0, 0, 0, 0.35);
-}
-.seg-btn {
-  appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font: inherit;
-  font-weight: 700;
-  font-size: .9rem;
-  color: var(--text-muted);
-  padding: .5rem 1.1rem;
-  min-height: 40px;
-  border-radius: 999px;
-  transition: background .15s ease, color .15s ease;
-}
-.seg-btn:hover { color: var(--text); }
-.seg-btn[aria-selected="true"] { background: var(--accent-2); color: var(--bg); }
-.seg-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ---- Song list ---------------------------------------------------------- */
 .content { max-width: var(--max-width); margin: 0 auto; padding: 1rem 1.25rem 2rem; }

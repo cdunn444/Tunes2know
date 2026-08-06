@@ -190,10 +190,12 @@
     return KEYS.indexOf(key) !== -1 ? key : "bass";
   }
 
-  /* --- The record toggle -------------------------------------------------
-     Collapsed, the switcher is a little spinning record labeled with the
-     current side. Tapping it expands the full pill, slides the selection to
-     the other side, then collapses back to the record with the new letter. */
+  /* --- The record menu ---------------------------------------------------
+     The record floats as a hub: tap it and Guitar (the A side) slides out
+     from its left while Bass (the B side) slides out from its right. Picking
+     a side swaps the content and re-letters the record's label; the menu
+     stays open until the record is tapped again or the page is scrolled.
+     It starts open on load so the options introduce themselves. */
   var recordCtl = null;
 
   function currentKey() {
@@ -205,56 +207,30 @@
     var stage = document.getElementById("switch-stage");
     var record = document.getElementById("record-toggle");
     var letter = document.getElementById("record-letter");
-    var seg = stage && stage.querySelector(".seg");
-    if (!stage || !record || !letter || !seg) return;
-
-    var reduceMotion = window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var animating = false;
+    if (!stage || !record || !letter) return;
 
     function sync() {
       var key = currentKey();
-      letter.textContent = key === "bass" ? "A" : "B";
-      record.setAttribute("aria-label",
-        key === "bass" ? "Switch to Side B · Guitar" : "Switch to Side A · Bass");
+      letter.textContent = key === "bass" ? "B" : "A"; // bass is the B side
     }
 
-    function setState(state) {
-      stage.dataset.state = state;
-      stage.style.width =
-        (state === "collapsed" ? record.offsetWidth : seg.offsetWidth) + "px";
+    function setOpen(open) {
+      stage.dataset.state = open ? "open" : "closed";
+      record.setAttribute("aria-expanded", open ? "true" : "false");
     }
+    function isOpen() { return stage.dataset.state === "open"; }
 
-    record.hidden = false;
     sync();
-    setState("collapsed");
+    setOpen(true); // land with the menu introduced
 
-    record.addEventListener("click", function () {
-      if (animating) return;
-      var target = currentKey() === "bass" ? "guitar" : "bass";
-      if (reduceMotion) {
-        selectSection(target, true);
-        sync();
-        return;
-      }
-      animating = true;
-      setState("expanded");
-      setTimeout(function () { selectSection(target, true); }, 300);
-      setTimeout(function () { sync(); setState("collapsed"); }, 1100);
-      setTimeout(function () { animating = false; }, 1400);
-    });
+    record.addEventListener("click", function () { setOpen(!isOpen()); });
 
-    window.addEventListener("resize", function () {
-      setState(stage.dataset.state || "collapsed");
-    });
+    // Scrolling tucks the menu away, leaving just the floating record.
+    window.addEventListener("scroll", function () {
+      if (isOpen() && window.scrollY > 8) setOpen(false);
+    }, { passive: true });
 
-    recordCtl = {
-      sync: sync,
-      // Direct picks on the expanded pill settle back into the record.
-      collapseSoon: function () {
-        setTimeout(function () { sync(); setState("collapsed"); }, 450);
-      },
-    };
+    recordCtl = { sync: sync };
   }
 
   function initTabs() {
@@ -263,7 +239,7 @@
       if (!btn) return;
       btn.addEventListener("click", function () {
         selectSection(key, true);
-        if (recordCtl) recordCtl.collapseSoon();
+        if (recordCtl) recordCtl.sync();
       });
       btn.addEventListener("keydown", function (e) {
         var i = KEYS.indexOf(key);
@@ -273,6 +249,7 @@
         if (next) {
           e.preventDefault();
           selectSection(next, true);
+          if (recordCtl) recordCtl.sync();
           var nextBtn = document.getElementById("tab-" + next);
           if (nextBtn) nextBtn.focus();
         }
