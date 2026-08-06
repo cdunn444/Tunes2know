@@ -1,16 +1,17 @@
 /* ==========================================================================
-   25 Tunes to Know on Bass
-   A dark UI inspired by Spotify, with an orange accent.
-   Fonts: Shrikhand (headlines) + DM Sans (body) — Google Fonts, self-hosted
+   25 Tunes to Know
+   A dark UI inspired by Spotify: deep blue-charcoal with an electric
+   violet accent.
+   Fonts: Sigmar (headlines) + DM Sans (body) — Google Fonts, self-hosted
    from /fonts so the site has no third-party requests.
    ========================================================================== */
 
 @font-face {
-  font-family: "Shrikhand";
+  font-family: "Sigmar";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("fonts/shrikhand-latin.woff2") format("woff2");
+  src: url("fonts/sigmar-latin.woff2") format("woff2");
 }
 
 @font-face {
@@ -22,21 +23,21 @@
 }
 
 :root {
-  --font-display: "Shrikhand", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --font-display: "Sigmar", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
   --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --bg: #1e1410;             /* dark brown site background */
-  --bg-elev: #181818;
-  --bg-elev-hover: #242424;
+  --bg: #15171e;             /* deep charcoal with a bluish undertone */
+  --bg-elev: #1a1d26;
+  --bg-elev-hover: #232734;
   --text: #ffffff;
-  --text-muted: #b3b3b3;
-  --text-soft: #d8d8d8;
-  --accent: #ff6a1f;         /* orange — reserved for CTAs (buttons) */
-  --accent-hover: #ff8442;
-  --accent-2: #d2b48c;       /* tan — non-CTA accents (badges, labels) */
-  --on-accent: #140a03;      /* near-black text on accent backgrounds */
-  --border: #2a2a2a;
+  --text-muted: #aab1c2;     /* cool gray, matches the charcoal's undertone */
+  --text-soft: #d6dae3;
+  --accent: #9d5eff;         /* electric violet — reserved for CTAs (buttons) */
+  --accent-hover: #ae7bff;
+  --accent-2: #c7b3ff;       /* soft lavender — non-CTA accents (badges, labels) */
+  --on-accent: #10121a;      /* near-black text on accent backgrounds */
+  --border: #2a2e3b;
   --radius: 12px;
   --max-width: 720px;
 }
@@ -68,9 +69,9 @@ body::before {
   width: min(78vw, 540px);
   height: min(58vh, 480px);
   background: radial-gradient(120% 120% at 0% 0%,
-    rgba(255, 106, 31, 0.36) 0%,
-    rgba(255, 106, 31, 0.12) 45%,
-    rgba(255, 106, 31, 0) 72%);
+    rgba(157, 94, 255, 0.34) 0%,
+    rgba(157, 94, 255, 0.12) 45%,
+    rgba(157, 94, 255, 0) 72%);
   pointer-events: none;
   z-index: 0;
 }
@@ -95,7 +96,7 @@ a { color: inherit; }
   margin: 0 0 .6rem;
   font-family: var(--font-display);
   font-size: clamp(2.3rem, 7.8vw, 3.6rem);
-  font-weight: 400; /* Shrikhand ships a single (chunky) weight */
+  font-weight: 400; /* Sigmar ships a single (very chunky) weight */
   letter-spacing: .01em;
   line-height: 1.15;
 }
@@ -230,7 +231,7 @@ a { color: inherit; }
   border-radius: 50%;
   background:
     repeating-radial-gradient(circle at 50% 50%,
-      #191310 0px, #191310 1.5px, #262019 1.5px, #262019 3.5px);
+      #101219 0px, #101219 1.5px, #1c1f2a 1.5px, #1c1f2a 3.5px);
   animation: record-spin 9s linear infinite;
 }
 .record-disc::before {
@@ -340,7 +341,7 @@ a { color: inherit; }
 }
 
 /* ---- Intro card (e.g. the guitar chord primer) --------------------------- */
-.intro-card { border-color: rgba(210, 180, 140, 0.35); }
+.intro-card { border-color: rgba(199, 179, 255, 0.35); }
 .intro-title {
   margin: 0 0 .5rem;
   font-family: var(--font-display);
