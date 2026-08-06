@@ -123,6 +123,49 @@ a { color: inherit; }
 }
 .btn-tab:hover { background: var(--accent); color: var(--on-accent); }
 
+/* ---- Side A/B switcher --------------------------------------------------- */
+/* A liquid-glass segmented control that sticks near the top while scrolling. */
+.switcher {
+  position: sticky;
+  top: .85rem;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+  margin: .25rem 0 1.25rem;
+}
+.seg {
+  display: flex;
+  gap: .25rem;
+  padding: .3rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border-radius: 999px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.seg-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  font-size: .9rem;
+  color: var(--text-muted);
+  padding: .5rem 1.1rem;
+  min-height: 40px;
+  border-radius: 999px;
+  transition: background .15s ease, color .15s ease;
+}
+.seg-btn:hover { color: var(--text); }
+.seg-btn[aria-selected="true"] { background: var(--accent-2); color: var(--bg); }
+.seg-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 /* ---- Song list ---------------------------------------------------------- */
 .content { max-width: var(--max-width); margin: 0 auto; padding: 1rem 1.25rem 2rem; }
 .song-list { list-style: none; margin: 0; padding: 0; }

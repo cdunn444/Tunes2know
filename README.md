@@ -1,8 +1,11 @@
-# 🎸 25 Tunes to Know on Bass
+# 🎸 25 Tunes to Know
 
-A tiny, dark, single-page web app: a numbered countdown of 25 essential basslines. Each
-song shows its number, name, artist, a short **"What to know"** note, an embedded Spotify
-player, and a button to **view the tab on Ultimate Guitar**.
+A tiny, dark, single-page web app: numbered countdowns of essential songs, with a
+**Side A · Bass / Side B · Guitar** switcher. Each song shows its number, name, artist,
+a short **"What to know"** note, an embedded Spotify player, and a button to **view the
+tab on Ultimate Guitar**. The switcher swaps the headline, subhead, playlist button, and
+song list in place, and sticks to the top while you scroll (`#bass` / `#guitar` links
+open a specific side).
 
 It's a plain static site — HTML, CSS, and a little JavaScript. No build step, no
 frameworks, nothing to install. It works by opening `index.html`, and it's free to host on
@@ -14,6 +17,10 @@ GitHub Pages.
 
 **You only ever edit one file: [`songs.js`](songs.js).**
 
+It holds two sides — `bass` and `guitar` — each with its own header copy
+(`tabLabel`, `title`, `subhead`), a `playlist` URL for the header button
+(leave `""` to hide the button), and a `songs` list.
+
 Each song is one block, in countdown order (the first one is #1):
 
 ```js
@@ -21,15 +28,16 @@ Each song is one block, in countdown order (the first one is #1):
   id: "3n3Ppam7vgaVa1iaRUc9Lp",   // the Spotify track ID (see below)
   title: "Song name",
   artist: "Artist",
-  analysis: "Why this bassline matters — a sentence or two.",
+  analysis: "Why this song matters — a sentence or two.",
   tab: "",                        // optional — a specific Ultimate Guitar tab link
 }
 ```
 
-- To **reorder** the countdown, move the blocks up or down.
+- To **reorder** a countdown, move the blocks up or down.
 - Leave `id` as `""` to show a placeholder instead of a player.
 - Leave `tab` as `""` and the "View tab" button automatically searches Ultimate Guitar
-  for that song. Paste an exact UG tab URL to send it straight to your favorite version.
+  for that song (it adds "bass" or "guitar" to the search based on the side). Paste an
+  exact UG tab URL to send it straight to your favorite version.
 
 ### Where do I get the `id`?
 

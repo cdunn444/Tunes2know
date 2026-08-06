@@ -15,16 +15,24 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <h1 class="site-title">25 Tunes to Know (on Bass)</h1>
-      <p class="site-subtitle">Master your bass face while learning these essential grooves. Some are hard to learn but all are fun to play!</p>
+      <h1 class="site-title" id="site-title">25 Tunes to Know (on Bass)</h1>
+      <p class="site-subtitle" id="site-subhead">Master your bass face while learning these essential grooves. Some are hard to learn but all are fun to play!</p>
       <div class="header-actions">
         <a class="btn btn-accent" id="playlist-link" href="#" target="_blank" rel="noopener">▶ Open full playlist in Spotify</a>
       </div>
     </div>
   </header>
 
+  <nav class="switcher" aria-label="Instrument">
+    <div class="seg" role="tablist">
+      <button class="seg-btn" role="tab" id="tab-bass" aria-controls="panel-bass" aria-selected="true">Side A · Bass</button>
+      <button class="seg-btn" role="tab" id="tab-guitar" aria-controls="panel-guitar" aria-selected="false">Side B · Guitar</button>
+    </div>
+  </nav>
+
   <main class="content">
-    <ol class="song-list" id="song-list"></ol>
+    <ol class="song-list" role="tabpanel" id="panel-bass" aria-labelledby="tab-bass"></ol>
+    <ol class="song-list" role="tabpanel" id="panel-guitar" aria-labelledby="tab-guitar" hidden></ol>
     <noscript><p class="empty">Please enable JavaScript to see the songs.</p></noscript>
   </main>
 
