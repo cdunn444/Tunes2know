@@ -57,18 +57,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient orange glow, fixed to the viewport: it stays put while the
-   content scrolls over it. Sits behind everything (z-index 0 vs 1). */
+/* Ambient orange glow pooled in the top-left corner, behind the record
+   logo — fixed to the viewport, so it stays put while content scrolls
+   over it. Sits behind everything (z-index 0 vs 1). */
 body::before {
   content: "";
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  height: 100vh;
-  background: linear-gradient(180deg,
-    rgba(255, 106, 31, 0.32) 0%,
-    rgba(255, 106, 31, 0.10) 38%,
+  width: min(78vw, 540px);
+  height: min(58vh, 480px);
+  background: radial-gradient(120% 120% at 0% 0%,
+    rgba(255, 106, 31, 0.36) 0%,
+    rgba(255, 106, 31, 0.12) 45%,
     rgba(255, 106, 31, 0) 72%);
   pointer-events: none;
   z-index: 0;
@@ -123,37 +124,39 @@ a { color: inherit; }
 }
 .btn-tab:hover { background: var(--accent); color: var(--on-accent); }
 
-/* ---- Side A/B switcher --------------------------------------------------- */
-/* A liquid-glass segmented control that sticks near the top while scrolling. */
+/* ---- The record menu ----------------------------------------------------- */
+/* The record sits top-left like the site's logo and sticks while you
+   scroll. Tapping it fans the page options out to its right; scrolling or
+   tapping again tucks them back behind the disc. */
 .switcher {
   position: sticky;
   top: .85rem;
   z-index: 20;
   display: flex;
-  justify-content: center;
-  padding: 0 1rem;
+  justify-content: flex-start;
+  padding: 0 1.25rem;
   margin: 1.1rem 0 0;
 }
-/* The record is a floating menu hub: the A side (Guitar) slides out from
-   its left, the B side (Bass) from its right. The stage never changes size —
-   the record stays centered and the options emerge from behind it. */
 .switch-stage {
   position: relative;
   height: 60px;
   width: 60px;
 }
 .switch-stage .record {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   z-index: 2;
 }
-.side-option {
+.switch-stage [role="tablist"] {
   position: absolute;
-  left: 50%;
+  left: calc(100% + 12px);
   top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
   z-index: 1;
+}
+.side-option {
   appearance: none;
   -webkit-appearance: none;
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -162,7 +165,7 @@ a { color: inherit; }
   font-weight: 700;
   font-size: .9rem;
   color: var(--text-muted);
-  padding: .5rem 1.15rem;
+  padding: .5rem 1.05rem;
   min-height: 42px;
   border-radius: 999px;
   white-space: nowrap;
@@ -172,6 +175,7 @@ a { color: inherit; }
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.10),
     0 10px 30px rgba(0, 0, 0, 0.35);
+  transform-origin: left center;
   transition: transform .28s cubic-bezier(.2, .8, .3, 1.1), opacity .2s ease,
     background .15s ease, color .15s ease, visibility 0s linear .28s;
 }
@@ -179,12 +183,13 @@ a { color: inherit; }
 .side-option[aria-selected="true"] { background: var(--accent-2); color: var(--bg); }
 .side-option:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-/* Closed: tucked behind the record. Open: slid out to either side. */
+/* Closed: tucked back behind the record. Open: fanned out to its right,
+   the near pill leading the cascade. */
 .switch-stage[data-state="closed"] .side-option {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translate(-50%, -50%) scale(.5);
+  transform: translateX(-18px) scale(.55);
 }
 .switch-stage[data-state="open"] .side-option {
   opacity: 1;
@@ -192,8 +197,16 @@ a { color: inherit; }
   transition: transform .28s cubic-bezier(.2, .8, .3, 1.1), opacity .2s ease,
     background .15s ease, color .15s ease, visibility 0s;
 }
-.switch-stage[data-state="open"] .side-left  { transform: translate(calc(-100% - 44px), -50%); }
-.switch-stage[data-state="open"] .side-right { transform: translate(44px, -50%); }
+/* Stagger only the movement/fade (delays map to transform, opacity, …). */
+.switch-stage[data-state="open"] .side-option:nth-child(2) { transition-delay: .06s, .06s, 0s, 0s, 0s; }
+.switch-stage[data-state="open"] .side-option:nth-child(3) { transition-delay: .12s, .12s, 0s, 0s, 0s; }
+
+/* Very narrow phones: slim the pills so all three fit beside the record. */
+@media (max-width: 374px) {
+  .switcher { padding: 0 1rem; }
+  .switch-stage [role="tablist"] { left: calc(100% + 10px); gap: .4rem; }
+  .side-option { font-size: .84rem; padding: .45rem .85rem; min-height: 38px; }
+}
 
 /* The record: warm vinyl grooves, a tan label bearing the side letter,
    spinning slowly like it's on a turntable. */
@@ -256,7 +269,12 @@ a { color: inherit; }
 @keyframes record-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) {
   .record-disc { animation: none; }
-  .side-option { transition: background .15s ease, color .15s ease; }
+  .side-option,
+  .switch-stage[data-state="open"] .side-option,
+  .switch-stage[data-state="closed"] .side-option {
+    transition: background .15s ease, color .15s ease;
+    transition-delay: 0s;
+  }
 }
 
 /* ---- Song list ---------------------------------------------------------- */
@@ -312,6 +330,8 @@ a { color: inherit; }
   display: block; width: 100%; height: 152px;
   border: 0; border-radius: var(--radius); margin-bottom: 1rem;
 }
+/* Artist pages get the taller embed that lists the artist's top tracks. */
+.song-embed.embed-artist { height: 352px; margin-bottom: 0; }
 .song-placeholder {
   display: flex; align-items: center; gap: .5rem;
   height: 152px; padding: 0 1rem; margin-bottom: 1rem;

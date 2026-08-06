@@ -15,21 +15,22 @@
 <body>
   <nav class="switcher" aria-label="Instrument">
     <div class="switch-stage" id="switch-stage" data-state="open">
-      <div role="tablist" aria-label="Sides">
-        <button class="side-option side-left" role="tab" id="tab-guitar" aria-controls="panel-guitar" aria-selected="false">Guitar</button>
-        <button class="side-option side-right" role="tab" id="tab-bass" aria-controls="panel-bass" aria-selected="true">Bass</button>
-      </div>
-      <button class="record" id="record-toggle" aria-expanded="true" aria-label="Side menu">
+      <button class="record" id="record-toggle" aria-expanded="true" aria-label="Menu">
         <span class="record-disc">
           <span class="record-label"><span class="record-letter" id="record-letter">B</span></span>
         </span>
       </button>
+      <div role="tablist" aria-label="Pages">
+        <button class="side-option" role="tab" id="tab-guitar" aria-controls="panel-guitar" aria-selected="false">Guitar</button>
+        <button class="side-option" role="tab" id="tab-bass" aria-controls="panel-bass" aria-selected="true">Bass</button>
+        <button class="side-option" role="tab" id="tab-artists" aria-controls="panel-artists" aria-selected="false">Artists</button>
+      </div>
     </div>
   </nav>
 
   <header class="site-header">
     <div class="header-inner">
-      <h1 class="site-title">25 Tunes to Know</h1>
+      <h1 class="site-title" id="site-title">25 Tunes to Know</h1>
       <p class="site-subtitle" id="site-subhead">Master your bass face while learning these essential grooves. Some are hard to learn but all are fun to play!</p>
       <div class="header-actions">
         <a class="btn btn-accent" id="playlist-link" href="#" target="_blank" rel="noopener">▶ Open full playlist in Spotify</a>
@@ -40,6 +41,7 @@
   <main class="content">
     <ol class="song-list" role="tabpanel" id="panel-bass" aria-labelledby="tab-bass"></ol>
     <ol class="song-list" role="tabpanel" id="panel-guitar" aria-labelledby="tab-guitar" hidden></ol>
+    <ol class="song-list" role="tabpanel" id="panel-artists" aria-labelledby="tab-artists" hidden></ol>
     <noscript><p class="empty">Please enable JavaScript to see the songs.</p></noscript>
   </main>
 

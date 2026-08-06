@@ -213,4 +213,93 @@ const SECTIONS = {
     ],
   },
 
+  /* ------------------------------------------------------------------ *
+   *  ARTISTS — 25 artists to know, ordered like a family tree:
+   *  the folk/songwriter roots up top, today's storytellers at the
+   *  bottom. Here `id` is a Spotify ARTIST id (the embed shows their
+   *  top tracks), and there's no tab link.
+   * ------------------------------------------------------------------ */
+  artists: {
+    tabLabel: "Artists",
+    headline: "25 Artists to Know",
+    subhead: "The family tree of the music you already love — folk roots at the top, the newest storytellers at the bottom. If Stick Season is on repeat, start digging!",
+    playlist: "",
+    songs: [
+      { id: "74ASZWbe4lXaubB36ztrGX", title: "Bob Dylan",
+        analysis: "Every songwriter you love is quoting him whether they know it or not — he's the one who made the words the whole point. Start with 'Don't Think Twice, It's All Right' and 'Girl from the North Country.'" },
+
+      { id: "70cRZdQywnSFp9pnc2WTCE", title: "Simon & Garfunkel",
+        analysis: "Paul Simon is the writer Noah Kahan points back to, and these two-voice harmonies are still the blueprint. Start with 'The Boxer' and 'America.'" },
+
+      { id: "5hW4L92KnC6dX9t7tYM4Ve", title: "Joni Mitchell",
+        analysis: "The confessional-songwriting playbook — guitar tunings nobody else uses, feelings nobody else could name. Start with 'A Case of You' and 'Both Sides Now.'" },
+
+      { id: "319yZVtYM9MBGqmSQnMyY6", title: "Carole King",
+        analysis: "She wrote hits for half the radio before stepping out front and making Tapestry, one of the warmest records ever cut. Start with 'It's Too Late' and 'So Far Away.'" },
+
+      { id: "0vn7UBvSQECKJm2817Yf1P", title: "James Taylor",
+        analysis: "The gentle fingerpicked template for every soft acoustic song since — and yes, Taylor Swift is literally named after him. Start with 'Fire and Rain' and 'Sweet Baby James.'" },
+
+      { id: "7EK1bQADBoqbYXnT4Cqv9w", title: "John Denver",
+        analysis: "Big-hearted, wide-open songs about home and mountains — the great-granddad of every stomp-and-holler singalong chorus. Start with 'Take Me Home, Country Roads' and 'Annie's Song.'" },
+
+      { id: "32vWCbZh0xZ4o9gkz4PsEU", title: "Dolly Parton",
+        analysis: "Before she was an icon she was a songwriting machine — 'Jolene' and 'I Will Always Love You' came out of the same session, as the legend goes. Start with 'Jolene' and 'Coat of Many Colors.'" },
+
+      { id: "08GQAI4eElDnROBrJRGE0X", title: "Fleetwood Mac",
+        analysis: "Five people breaking up with each other in real time and turning it into perfect pop — Rumours is the messy-feelings masterclass, and Stevie Nicks is Taylor's hero. Start with 'Dreams' and 'Landslide.'" },
+
+      { id: "3eqjTLE0HfPfh78zjh6TqT", title: "Bruce Springsteen",
+        analysis: "Small towns, big engines, people trying to get out — the storytelling DNA behind half of today's country-folk boom. Start with 'Thunder Road,' then the stripped-down Nebraska album." },
+
+      { id: "0nJUwPwC9Ti4vvuJ0q3MfT", title: "John Prine",
+        analysis: "The songwriters' favorite songwriter: plainspoken, funny, and devastating in the same verse. Start with 'Angel from Montgomery' and 'In Spite of Ourselves.'" },
+
+      { id: "7oPgCQqMMXEXrNau5vxYZP", title: "Tracy Chapman",
+        analysis: "Proof that one voice and one guitar can stop a room mid-sentence — 'Fast Car' just did it again for a whole new generation. Start there, then 'Give Me One Reason.'" },
+
+      { id: "25IG9fa7cbdmCIy3OnuH57", title: "The Chicks",
+        analysis: "Fearless country storytelling with sibling-tight harmonies — the bridge from Dolly to Taylor, who pulled them onto 'Soon You'll Get Better.' Start with 'Cowboy Take Me Away' and 'Wide Open Spaces.'" },
+
+      { id: "2sG4zTOLvjKG1PSoOyf5Ej", title: "Brandi Carlile",
+        analysis: "A voice that cracks exactly where the song needs it to — and she's the one who championed Joni Mitchell back onto the stage. Start with 'The Story' and 'The Joke.'" },
+
+      { id: "3Q8wgwyVVv0z4UEh1HB0KY", title: "Jason Isbell",
+        analysis: "Modern Americana's gold standard for turning hard truths into gorgeous lines. Start with 'Cover Me Up' and 'If We Were Vampires' — fair warning, that second one is a weeper." },
+
+      { id: "13ZEDW6vyBF12HYcZRr4EV", title: "Tyler Childers",
+        analysis: "Appalachian fiddle-and-holler with a poet's pen — the raw end of the sound Zach Bryan runs with. Start with 'Feathered Indians' and 'All Your'n.'" },
+
+      { id: "70kkdajctXSbqSMJbQO424", title: "Kacey Musgraves",
+        analysis: "Country roots with a pop shimmer — on Golden Hour she basically invented her own weather. Start with 'Slow Burn' and 'Rainbow.'" },
+
+      { id: "4LEiUm1SRbFMgfqnQTwUbQ", title: "Bon Iver",
+        analysis: "One winter in a cabin became For Emma, Forever Ago; years later he's folklore-era Taylor's duet partner on 'exile.' Start with 'Skinny Love' and 'Holocene.'" },
+
+      { id: "3gd8FJtBJtkRxdfbTu19U2", title: "Mumford & Sons",
+        analysis: "The banjo-driven stomp that kicked the folk revival into stadiums and set the table for Noah Kahan. Start with 'The Cave' and 'I Will Wait.'" },
+
+      { id: "16oZKvXb6WkQlVAjwo2Wbg", title: "The Lumineers",
+        analysis: "Campfire-simple, chorus-first folk-pop — two chords, a 'ho hey,' and you're hooked. Start with 'Stubborn Love' and 'Ophelia.'" },
+
+      { id: "2FXC3k01G6Gw61bmprjgqS", title: "Hozier",
+        analysis: "Bluesy, bookish, and huge-hearted — he and Noah Kahan trade verses on the 'Northern Attitude' duet. Start with 'Take Me to Church' and 'Cherry Wine.'" },
+
+      { id: "6ltzsmQQbmdoHHbLZ4ZN25", title: "Lord Huron",
+        analysis: "Cinematic campfire ghost stories — 'The Night We Met' is the slow dance of the decade. Start there, then 'Ends of the Earth.'" },
+
+      { id: "1r1uxoy19fzMxunt3ONAkG", title: "Phoebe Bridgers",
+        analysis: "Quiet devastation delivered with a dry wink — she's on Taylor's 'Nothing New' and is a third of boygenius. Start with 'Motion Sickness' and 'Scott Street.'" },
+
+      { id: "1GmsPCcpKgF9OhlNXjOsbS", title: "Lizzy McAlpine",
+        analysis: "Whisper-close songwriting where the bridge is always the gut-punch — 'ceilings' is the thesis statement. Start there, then 'doomsday.'" },
+
+      { id: "40ZNYROS4zLfyyBSs2PGe2", title: "Zach Bryan",
+        analysis: "Songs that sound recorded on a porch and get shouted back word-for-word in stadiums — he even pulled Springsteen onto 'Sandpaper.' Start with 'Something in the Orange.'" },
+
+      { id: "4DSDa4HvAWqvb3dMHUOAfd", title: "Stephen Wilson Jr.",
+        analysis: "Grit-and-grace country-rock about grief, home, and growing up — the newest branch on this whole family tree. Start with 'Year to Be Young 1994' and 'Grief Is Only Love.'" },
+    ],
+  },
+
 };

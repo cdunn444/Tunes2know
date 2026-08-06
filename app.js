@@ -8,7 +8,11 @@
 (function () {
   "use strict";
 
-  var KEYS = ["bass", "guitar"];
+  var KEYS = ["bass", "guitar", "artists"];
+
+  // What the record's label wears per page: vinyl sides for the
+  // instruments, a star for the artists.
+  var LETTERS = { bass: "B", guitar: "A", artists: "★" };
 
   // Small helper: create an element with an optional class and text.
   function el(tag, cls, text) {
@@ -22,6 +26,10 @@
     return "https://open.spotify.com/embed/track/" + encodeURIComponent(id) + "?utm_source=generator";
   }
 
+  function artistEmbedUrl(id) {
+    return "https://open.spotify.com/embed/artist/" + encodeURIComponent(id) + "?utm_source=generator";
+  }
+
   // Where "View tab" points: a pinned URL if given, else a UG search that
   // includes the instrument so bass and guitar songs find the right tabs.
   function tabUrl(song, instrument) {
@@ -30,7 +38,8 @@
     return "https://www.ultimate-guitar.com/search.php?search_type=title&value=" + encodeURIComponent(query);
   }
 
-  function renderSong(song, index, instrument) {
+  function renderSong(song, index, key) {
+    var isArtist = key === "artists"; // artist cards embed the artist page, no tab link
     var li = el("li", "song");
 
     var head = el("div", "song-head");
@@ -48,22 +57,24 @@
 
     if (song.id) {
       var iframe = document.createElement("iframe");
-      iframe.className = "song-embed";
-      iframe.src = embedUrl(song.id);
+      iframe.className = "song-embed" + (isArtist ? " embed-artist" : "");
+      iframe.src = isArtist ? artistEmbedUrl(song.id) : embedUrl(song.id);
       iframe.loading = "lazy";
       iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
-      iframe.setAttribute("title", (song.title || "This song") + " — Spotify player");
+      iframe.setAttribute("title", (song.title || "This") + " — Spotify player");
       li.appendChild(iframe);
     } else {
       li.appendChild(el("div", "song-placeholder",
-        "🎵 Spotify player appears here once this song's track link is added."));
+        "🎵 Spotify player appears here once this " + (isArtist ? "artist's" : "song's") + " link is added."));
     }
 
-    var tab = el("a", "btn btn-tab", "View tab on Ultimate Guitar ↗");
-    tab.href = tabUrl(song, instrument);
-    tab.target = "_blank";
-    tab.rel = "noopener";
-    li.appendChild(tab);
+    if (!isArtist) {
+      var tab = el("a", "btn btn-tab", "View tab on Ultimate Guitar ↗");
+      tab.href = tabUrl(song, key);
+      tab.target = "_blank";
+      tab.rel = "noopener";
+      li.appendChild(tab);
+    }
 
     return li;
   }
@@ -153,7 +164,7 @@
     });
   }
 
-  // Show one side: swap tabs, panels, headline, subhead, and playlist button.
+  // Show one page: swap tabs, panels, headline, subhead, and playlist button.
   function selectSection(key, updateHash) {
     if (KEYS.indexOf(key) === -1) key = "bass";
     var section = (typeof SECTIONS !== "undefined" && SECTIONS[key]) || {};
@@ -165,6 +176,11 @@
       if (btn) btn.setAttribute("aria-selected", isActive ? "true" : "false");
       if (panel) panel.hidden = !isActive;
     });
+
+    var headline = section.headline || "25 Tunes to Know";
+    var title = document.getElementById("site-title");
+    if (title) title.textContent = headline;
+    document.title = headline;
 
     var subhead = document.getElementById("site-subhead");
     if (subhead && section.subhead) subhead.textContent = section.subhead;
@@ -180,6 +196,12 @@
     }
 
     if (updateHash) {
+      // A picked page starts from its top. The jump must be instant — a
+      // smooth scroll would stream scroll events past the record menu's
+      // close-on-scroll handler and shut it. ("instant" also overrides the
+      // site's CSS smooth-scrolling; ancient browsers fall through.)
+      try { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); }
+      catch (e) { window.scrollTo(0, 0); }
       if (window.history && history.replaceState) history.replaceState(null, "", "#" + key);
       else location.hash = key;
     }
@@ -191,16 +213,19 @@
   }
 
   /* --- The record menu ---------------------------------------------------
-     The record floats as a hub: tap it and Guitar (the A side) slides out
-     from its left while Bass (the B side) slides out from its right. Picking
-     a side swaps the content and re-letters the record's label; the menu
-     stays open until the record is tapped again or the page is scrolled.
-     It starts open on load so the options introduce themselves. */
+     The record sits top-left like the site's logo: tap it and the pages fan
+     out to its right. Picking one swaps the content and re-letters the
+     record's label; the menu stays open until the record is tapped again or
+     the page is scrolled. It starts open on load so the options introduce
+     themselves. */
   var recordCtl = null;
 
   function currentKey() {
-    var g = document.getElementById("tab-guitar");
-    return g && g.getAttribute("aria-selected") === "true" ? "guitar" : "bass";
+    for (var i = 0; i < KEYS.length; i++) {
+      var btn = document.getElementById("tab-" + KEYS[i]);
+      if (btn && btn.getAttribute("aria-selected") === "true") return KEYS[i];
+    }
+    return "bass";
   }
 
   function initRecord() {
@@ -210,8 +235,7 @@
     if (!stage || !record || !letter) return;
 
     function sync() {
-      var key = currentKey();
-      letter.textContent = key === "bass" ? "B" : "A"; // bass is the B side
+      letter.textContent = LETTERS[currentKey()] || "B";
     }
 
     function setOpen(open) {
