@@ -77,9 +77,6 @@
       songs.forEach(function (song, i) { list.appendChild(renderSong(song, i)); });
     }
 
-    var count = document.getElementById("song-count");
-    if (count) count.textContent = songs.length + (songs.length === 1 ? " song" : " songs");
-
     var playlist = document.getElementById("playlist-link");
     if (playlist) {
       if (typeof PLAYLIST_URL !== "undefined" && PLAYLIST_URL) playlist.href = PLAYLIST_URL;
