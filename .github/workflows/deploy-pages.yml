@@ -17,8 +17,10 @@ permissions:
 # Only one Pages deployment at a time. Do NOT cancel an in-progress run:
 # killing a deploy mid-publish orphans the Pages deployment and jams the
 # environment. Newer runs queue politely behind the active one instead.
+# (Group renamed from "pages" to orphan a permanently-wedged zombie run that
+# was blocking the old group.)
 concurrency:
-  group: "pages"
+  group: "pages-deploy"
   cancel-in-progress: false
 
 jobs:
