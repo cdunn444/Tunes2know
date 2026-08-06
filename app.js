@@ -190,11 +190,81 @@
     return KEYS.indexOf(key) !== -1 ? key : "bass";
   }
 
+  /* --- The record toggle -------------------------------------------------
+     Collapsed, the switcher is a little spinning record labeled with the
+     current side. Tapping it expands the full pill, slides the selection to
+     the other side, then collapses back to the record with the new letter. */
+  var recordCtl = null;
+
+  function currentKey() {
+    var g = document.getElementById("tab-guitar");
+    return g && g.getAttribute("aria-selected") === "true" ? "guitar" : "bass";
+  }
+
+  function initRecord() {
+    var stage = document.getElementById("switch-stage");
+    var record = document.getElementById("record-toggle");
+    var letter = document.getElementById("record-letter");
+    var seg = stage && stage.querySelector(".seg");
+    if (!stage || !record || !letter || !seg) return;
+
+    var reduceMotion = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var animating = false;
+
+    function sync() {
+      var key = currentKey();
+      letter.textContent = key === "bass" ? "A" : "B";
+      record.setAttribute("aria-label",
+        key === "bass" ? "Switch to Side B · Guitar" : "Switch to Side A · Bass");
+    }
+
+    function setState(state) {
+      stage.dataset.state = state;
+      stage.style.width =
+        (state === "collapsed" ? record.offsetWidth : seg.offsetWidth) + "px";
+    }
+
+    record.hidden = false;
+    sync();
+    setState("collapsed");
+
+    record.addEventListener("click", function () {
+      if (animating) return;
+      var target = currentKey() === "bass" ? "guitar" : "bass";
+      if (reduceMotion) {
+        selectSection(target, true);
+        sync();
+        return;
+      }
+      animating = true;
+      setState("expanded");
+      setTimeout(function () { selectSection(target, true); }, 300);
+      setTimeout(function () { sync(); setState("collapsed"); }, 1100);
+      setTimeout(function () { animating = false; }, 1400);
+    });
+
+    window.addEventListener("resize", function () {
+      setState(stage.dataset.state || "collapsed");
+    });
+
+    recordCtl = {
+      sync: sync,
+      // Direct picks on the expanded pill settle back into the record.
+      collapseSoon: function () {
+        setTimeout(function () { sync(); setState("collapsed"); }, 450);
+      },
+    };
+  }
+
   function initTabs() {
     KEYS.forEach(function (key) {
       var btn = document.getElementById("tab-" + key);
       if (!btn) return;
-      btn.addEventListener("click", function () { selectSection(key, true); });
+      btn.addEventListener("click", function () {
+        selectSection(key, true);
+        if (recordCtl) recordCtl.collapseSoon();
+      });
       btn.addEventListener("keydown", function (e) {
         var i = KEYS.indexOf(key);
         var next = null;
@@ -210,6 +280,7 @@
     });
     window.addEventListener("hashchange", function () {
       selectSection(currentFromHash(), false);
+      if (recordCtl) recordCtl.sync();
     });
   }
 
@@ -217,5 +288,6 @@
     renderAll();
     initTabs();
     selectSection(currentFromHash(), false);
+    initRecord();
   });
 })();

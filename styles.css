@@ -134,10 +134,108 @@ a { color: inherit; }
   padding: 0 1rem;
   margin: 1.1rem 0 0;
 }
+/* Stage holds the two forms of the control — the little spinning record
+   (collapsed) and the full segmented pill (expanded) — stacked and
+   cross-faded. JS drives data-state and the stage width. */
+.switch-stage {
+  position: relative;
+  height: 52px;
+  min-width: 52px;
+  transition: width .28s ease;
+}
+.switch-stage .record,
+.switch-stage .seg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transition: opacity .22s ease, transform .22s ease, visibility 0s linear .22s;
+}
+.switch-stage[data-state="collapsed"] .seg,
+.switch-stage[data-state="expanded"] .record {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(.55);
+}
+.switch-stage[data-state="collapsed"] .record,
+.switch-stage[data-state="expanded"] .seg {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity .22s ease, transform .22s ease, visibility 0s;
+}
+
+/* The record: warm vinyl grooves, a tan label bearing the side letter,
+   spinning slowly like it's on a turntable. */
+.record {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 30px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+.record-disc {
+  /* the part that actually spins (label and letter ride along) */
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle at 50% 50%,
+      #191310 0px, #191310 1.5px, #262019 1.5px, #262019 3.5px);
+  animation: record-spin 9s linear infinite;
+}
+.record-disc::before {
+  /* light sheen that sweeps as the record turns */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    rgba(255, 255, 255, 0.10) 0deg,
+    transparent 70deg,
+    transparent 180deg,
+    rgba(255, 255, 255, 0.05) 250deg,
+    transparent 320deg);
+}
+.record-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.record-letter {
+  font-family: var(--font-display);
+  font-size: .95rem;
+  line-height: 1;
+  color: var(--bg);
+}
+.record:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@keyframes record-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .record-disc { animation: none; }
+  .switch-stage,
+  .switch-stage .record,
+  .switch-stage .seg { transition: none; }
+}
+
 .seg {
   display: flex;
   gap: .25rem;
   padding: .3rem;
+  white-space: nowrap;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
   border: 1px solid rgba(255, 255, 255, 0.14);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
