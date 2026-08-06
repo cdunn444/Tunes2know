@@ -14,11 +14,12 @@ permissions:
   pages: write
   id-token: write
 
-# Only one Pages deployment at a time; a newer run supersedes an in-progress one
-# (prevents the "deployment already in progress" collisions).
+# Only one Pages deployment at a time. Do NOT cancel an in-progress run:
+# killing a deploy mid-publish orphans the Pages deployment and jams the
+# environment. Newer runs queue politely behind the active one instead.
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
