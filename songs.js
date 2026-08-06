@@ -118,6 +118,12 @@ const SECTIONS = {
     tabLabel: "Side B · Guitar",
     subhead: "Turn up the volume to 11 with these classic guitar tracks. Learn a handful of chords and you'll be able to play most songs out there!",
     playlist: "",
+    /* Shown as a card above the songs on this side. */
+    intro: {
+      title: "Start here: lock down these chords",
+      text: "Get these eight under your fingers and you've unlocked about 90% of the songs out there — including most of the list below.",
+      chords: ["G", "C", "D", "Em", "Am", "A", "E", "Dm"],
+    },
     songs: Array.from({ length: 25 }, function (_, i) {
       return {
         id: "",

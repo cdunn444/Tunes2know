@@ -226,6 +226,34 @@ a { color: inherit; }
   background: rgba(0, 0, 0, 0.25); color: var(--text-muted); font-size: .92rem;
 }
 
+/* ---- Intro card (e.g. the guitar chord primer) --------------------------- */
+.intro-card { border-color: rgba(210, 180, 140, 0.35); }
+.intro-title {
+  margin: 0 0 .5rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem; font-weight: 400; letter-spacing: .01em; line-height: 1.2;
+}
+.chord-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .35rem;
+}
+.chord {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  height: 2.75rem;
+  padding: 0 .95rem;
+  border-radius: 999px;
+  background: var(--accent-2);
+  color: var(--bg);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
 /* ---- Footer ------------------------------------------------------------- */
 .site-footer {
   max-width: var(--max-width); margin: 0 auto;

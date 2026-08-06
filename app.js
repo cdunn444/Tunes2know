@@ -68,6 +68,21 @@
     return li;
   }
 
+  // Optional per-side intro card (e.g. the guitar chord primer).
+  function renderIntro(intro) {
+    var li = el("li", "song intro-card");
+    if (intro.title) li.appendChild(el("h2", "intro-title", intro.title));
+    if (intro.text) li.appendChild(el("p", "song-analysis", intro.text));
+    if (intro.chords && intro.chords.length) {
+      var row = el("div", "chord-row");
+      intro.chords.forEach(function (chord) {
+        row.appendChild(el("span", "chord", chord));
+      });
+      li.appendChild(row);
+    }
+    return li;
+  }
+
   // Fill both panels once; hidden panels keep their lazy iframes unloaded
   // until shown, and loaded players survive switching back and forth.
   function renderAll() {
@@ -77,6 +92,7 @@
       var section = sections[key];
       if (!panel || !section) return;
       panel.innerHTML = "";
+      if (section.intro) panel.appendChild(renderIntro(section.intro));
       var list = section.songs || [];
       if (!list.length) {
         panel.appendChild(el("p", "empty", "No songs here yet — check back soon."));
