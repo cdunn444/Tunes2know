@@ -117,7 +117,7 @@ const SECTIONS = {
   guitar: {
     tabLabel: "Side B · Guitar",
     subhead: "Turn up the volume to 11 with these classic guitar tracks. Learn a handful of chords and you'll be able to play most songs out there!",
-    playlist: "",
+    playlist: "https://open.spotify.com/playlist/1wHuNOuYScGEJJBRBZUbM9",
     /* Shown as a card above the songs on this side.
        Each chord's frets are low E → high e: -1 = don't play, 0 = open string,
        1+ = fret number. These draw the mini chord diagrams. */
@@ -135,15 +135,82 @@ const SECTIONS = {
         { name: "Dm", frets: [-1, -1, 0, 2, 3, 1] },
       ],
     },
-    songs: Array.from({ length: 25 }, function (_, i) {
-      return {
-        id: "",
-        title: "Guitar song #" + (i + 1),
-        artist: "",
-        analysis: "Your “what to know” note for this riff will go here — a sentence or two on why it matters and what to listen for.",
-        tab: "",
-      };
-    }),
+    songs: [
+      { id: "5CQ30WqJwcep0pYcV4AMNc", title: "Stairway to Heaven", artist: "Led Zeppelin",
+        analysis: "The fingerpicked intro is the rite of passage for guitarists — arpeggios that build into one of the greatest solos ever recorded. Learn it in pieces; it teaches a little of everything.", tab: "" },
+
+      { id: "5dOR5PYfqQNLru3cMuwYg8", title: "Dust in the Wind", artist: "Kansas",
+        analysis: "The classic Travis-picking study: thumb and fingers rolling steadily through simple shapes. Once this pattern clicks, a whole world of fingerstyle opens up.", tab: "" },
+
+      { id: "3pRaLNL3b8x5uBOcsgvdqM", title: "Hallelujah", artist: "Jeff Buckley",
+        analysis: "Gentle 6/8 arpeggios where every note of the chord gets to ring. A masterclass in touch, patience, and letting space do the emotional work.", tab: "" },
+
+      { id: "6mFkJmJqdDVQ1REhVfGgd1", title: "Wish You Were Here", artist: "Pink Floyd",
+        analysis: "That opening riff weaves single notes through open G and Em shapes — chords you already know from the primer above. Loose, singable, and endlessly satisfying.", tab: "" },
+
+      { id: "48UPSzbZjgc449aqz8bxox", title: "Californication", artist: "Red Hot Chili Peppers",
+        analysis: "A clean, melodic two-chord picking pattern that proves electric guitar doesn't have to be loud to be memorable. Great for practicing smooth chord-to-chord motion.", tab: "" },
+
+      { id: "5ghIJDpPoe3CfHMGu71E6T", title: "Smells Like Teen Spirit", artist: "Nirvana",
+        analysis: "Four power chords and a wall of attitude — the riff that made a generation pick up guitar. Learn the quiet-verse/loud-chorus trick; it's the whole grunge playbook.", tab: "" },
+
+      { id: "5wj4E6IsrVtn8IBJQOd0Cl", title: "Wonderwall", artist: "Oasis",
+        analysis: "The campfire classic: capo on, keep two fingers planted, and let the top strings ring through every chord. It's the payoff for learning Em, G, D, and A.", tab: "" },
+
+      { id: "7iN1s7xHE4ifF5povM6A48", title: "Let It Be", artist: "The Beatles",
+        analysis: "C, G, Am, F — the four-chord progression that powers half of popular music, in its most famous form. Proof that the primer chords above really do unlock everything.", tab: "" },
+
+      { id: "5jgFfDIR6FR0gvlA56Nakr", title: "Blackbird", artist: "The Beatles",
+        analysis: "McCartney's fingerpicking étude — two moving voices over an open-string drone. Slow at first, hypnotic once it flows, and gorgeous forever after.", tab: "" },
+
+      { id: "28cnXtME493VX9NOw9cIUh", title: "Hurt", artist: "Johnny Cash",
+        analysis: "Three sparse chords, barely strummed — and one of the most devastating recordings ever made. The lesson: what you leave out matters more than what you play.", tab: "" },
+
+      { id: "3PQLYVskjUeRmRIfECsL0X", title: "No Woman, No Cry", artist: "Bob Marley & The Wailers",
+        analysis: "C, G, Am, F again — this time with reggae's off-beat upstroke skank. Learn to feel beats 2 and 4 and your rhythm hand levels up for good.", tab: "" },
+
+      { id: "7f8fIUg4Dgch0I8wjSpkFa", title: "Can't Help Falling in Love", artist: "Elvis Presley",
+        analysis: "Slow 6/8 arpeggios through gentle open shapes — the song every room goes quiet for. A beautiful first 'performance piece' once the chords are steady.", tab: "" },
+
+      { id: "40riOy7x9W7GXjyGp4pjAv", title: "Hotel California", artist: "Eagles",
+        analysis: "A hypnotic chord cycle under one of rock's great harmonized twin-guitar solos. The verse chords are a workout; the ending duel is a destination.", tab: "" },
+
+      { id: "1aUTJpaxVd8LpUfbb19wZH", title: "Yellow", artist: "Coldplay",
+        analysis: "Big open-position chords with ringing color notes and a steady, washy strum. A great study in making simple shapes sound huge.", tab: "" },
+
+      { id: "70LcF31zb1H0PyJoS1Sx1r", title: "Creep", artist: "Radiohead",
+        analysis: "Four chords, one famous move: major sliding to minor right when the lyric turns. Plus the crunching pre-chorus stabs — the most satisfying noise a beginner can make.", tab: "" },
+
+      { id: "2aoo2jlRnM3A0NyLQqMN2f", title: "All Along the Watchtower", artist: "Jimi Hendrix",
+        analysis: "A three-chord loop you already know from the primer, transformed by Hendrix into a monument. Study how rhythm playing and lead playing blur into one voice.", tab: "" },
+
+      { id: "7yq4Qj7cqayVTp3FF9CWbm", title: "Riptide", artist: "Vance Joy",
+        analysis: "Am, G, C around and around with a bouncy strum — three primer chords and you're playing the whole song tonight. Instant-gratification fuel for practice.", tab: "" },
+
+      { id: "2ihCaVdNZmnHZWt0fvAM7B", title: "Little Talks", artist: "Of Monsters and Men",
+        analysis: "Simple chords driven by dynamics — soft picking in the verses, big stabs on the horn hits. A fun study in making acoustic strumming feel like a full band.", tab: "" },
+
+      { id: "1Y373MqadDRtclJNdnUXVc", title: "Paranoid", artist: "Black Sabbath",
+        analysis: "The galloping power-chord riff that basically invented metal rhythm guitar. Builds downpicking stamina fast — and sounds great even played slowly.", tab: "" },
+
+      { id: "4sojCCLEco1pqIEujphKHe", title: "House of the Rising Sun", artist: "The Animals",
+        analysis: "The arpeggio starter kit: Am, C, D, F, E rolled one note at a time in waltz time. Every chord is in the primer above — this song is why you learned them.", tab: "" },
+
+      { id: "34gCuhDGsG4bRPIf9bb02f", title: "Thinking Out Loud", artist: "Ed Sheeran",
+        analysis: "A soulful groove built on muted, percussive strumming — the 'heartbeat' feel matters more than the (easy) chords. Great for learning to strum like a drummer.", tab: "" },
+
+      { id: "7jGzYUZ2Bgg8BDfYlQRfn8", title: "Wild Thing", artist: "The Troggs",
+        analysis: "A, D, E — three primer chords, maximum swagger, and quite possibly the first song ever assigned to a beginner. Learn it in ten minutes; play it forever.", tab: "" },
+
+      { id: "6YIggUJW3ttAAPRdnki8RM", title: "Disarm", artist: "The Smashing Pumpkins",
+        analysis: "Huge acoustic strums under bells and strings — the same few shapes hit with real drama. A lesson in playing simply but meaning it.", tab: "" },
+
+      { id: "6A6bRcB9OYABkhvWI4Rt9m", title: "Everlong (Acoustic)", artist: "Foo Fighters",
+        analysis: "Drop the low string to D and the whole song sits under two fingers. This stripped version shows how a driving rhythm part can carry a song on its own.", tab: "" },
+
+      { id: "5B8Pnf983pH6AnYxlDtlT0", title: "Before You Accuse Me", artist: "Bo Diddley",
+        analysis: "A 12-bar blues classic — the same foundation as the bass side's closer, now under your fingers as chords and shuffle rhythm. Learn this form and you can jam with anyone, anywhere.", tab: "" },
+    ],
   },
 
 };
