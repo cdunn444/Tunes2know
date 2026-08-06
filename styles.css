@@ -32,9 +32,10 @@
   --text: #ffffff;
   --text-muted: #b3b3b3;
   --text-soft: #d8d8d8;
-  --accent: #ff6a1f;
+  --accent: #ff6a1f;         /* orange — reserved for CTAs (buttons) */
   --accent-hover: #ff8442;
-  --on-accent: #140a03;      /* near-black text on the orange button */
+  --accent-2: #d2b48c;       /* tan — non-CTA accents (badges, labels) */
+  --on-accent: #140a03;      /* near-black text on accent backgrounds */
   --border: #2a2a2a;
   --radius: 12px;
   --max-width: 720px;
@@ -155,7 +156,7 @@ a { color: inherit; }
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--accent-2);
   color: var(--on-accent);
   font-family: var(--font-display);
   font-size: 1.25rem; font-weight: 400; line-height: 1;
@@ -172,7 +173,7 @@ a { color: inherit; }
 .wtk-label {
   margin: 0 0 .3rem;
   font-size: .7rem; font-weight: 700; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--accent);
+  text-transform: uppercase; color: var(--accent-2);
 }
 .song-analysis { margin: 0 0 1rem; color: var(--text-soft); font-size: .98rem; line-height: 1.6; }
 
