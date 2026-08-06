@@ -140,11 +140,6 @@ a { color: inherit; }
   border-radius: var(--radius);
   padding: 1.15rem 1.25rem 1.35rem;
   margin-bottom: 1rem;
-  transition: background .15s ease, border-color .15s ease;
-}
-.song:hover {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.05));
-  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .song-head { display: flex; align-items: center; gap: .9rem; margin-bottom: .85rem; }
