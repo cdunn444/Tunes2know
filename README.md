@@ -1,16 +1,12 @@
-# 🎸 Tunes to Know
+# 🎸 25 Tunes to Know on Bass
 
-A tiny, no-frills web app that shares essential songs, split into three tabs:
+A tiny, dark, single-page web app: a numbered countdown of 25 essential basslines. Each
+song shows its number, name, artist, a short **"What to know"** note, an embedded Spotify
+player, and a button to **view the tab on Ultimate Guitar**.
 
-- **To Know** — songs worth knowing
-- **Learn on Bass** — songs worth learning on bass
-- **Learn on Guitar** — songs worth learning on guitar
-
-Each song shows a short note on *why* it's here, plus an embedded Spotify player.
-
-It's a plain static site — just HTML, CSS, and a little JavaScript. No build step,
-no frameworks, nothing to install. It works by opening `index.html`, and it's free
-to host on GitHub Pages.
+It's a plain static site — HTML, CSS, and a little JavaScript. No build step, no
+frameworks, nothing to install. It works by opening `index.html`, and it's free to host on
+GitHub Pages.
 
 ---
 
@@ -18,67 +14,66 @@ to host on GitHub Pages.
 
 **You only ever edit one file: [`songs.js`](songs.js).**
 
-Each song is a small block like this:
+Each song is one block, in countdown order (the first one is #1):
 
 ```js
 {
   id: "3n3Ppam7vgaVa1iaRUc9Lp",   // the Spotify track ID (see below)
-  title: "Mr. Brightside",        // optional — just helps you scan the list
-  artist: "The Killers",          // optional
-  note: "Why this song is here — one or two sentences.",
+  title: "Song name",
+  artist: "Artist",
+  analysis: "Why this bassline matters — a sentence or two.",
+  tab: "",                        // optional — a specific Ultimate Guitar tab link
 }
 ```
 
-To **add** a song, copy one of those blocks, paste it into the right list
-(`know`, `bass`, or `guitar`), and change the values. Keep the commas between
-blocks.
+- To **reorder** the countdown, move the blocks up or down.
+- Leave `id` as `""` to show a placeholder instead of a player.
+- Leave `tab` as `""` and the "View tab" button automatically searches Ultimate Guitar
+  for that song. Paste an exact UG tab URL to send it straight to your favorite version.
 
 ### Where do I get the `id`?
 
 1. In Spotify, right-click a song → **Share** → **Copy Song Link**.
-2. You'll get a link like
-   `https://open.spotify.com/track/3n3Ppam7vgaVa1iaRUc9Lp?si=abc123`
-3. The `id` is the part between `/track/` and the `?` —
-   here that's `3n3Ppam7vgaVa1iaRUc9Lp`.
+2. You get a link like `https://open.spotify.com/track/3n3Ppam7vgaVa1iaRUc9Lp?si=abc`
+3. The `id` is the part between `/track/` and the `?` — here `3n3Ppam7vgaVa1iaRUc9Lp`.
 
-Leave `id` as `""` (empty) to show a friendly placeholder instead of a player.
+The playlist button in the header points at `PLAYLIST_URL` (top of `songs.js`).
 
 ---
 
 ## Previewing it on your computer
 
-Just double-click `index.html` to open it in your browser. That's it.
-
-(If the Spotify players ever look odd when opened this way, run a tiny local
-server instead — in this folder run `python3 -m http.server` and visit
-`http://localhost:8000`. Not required for GitHub Pages.)
+Double-click `index.html` to open it in your browser. That's it.
 
 ---
 
 ## Putting it on the web (free, via GitHub Pages)
 
-1. Make sure this repository is **public** (free GitHub Pages needs a public repo;
-   private Pages requires a paid plan).
-2. In the repo on GitHub, go to **Settings → Pages**.
+1. Make sure this repository is **public** (free GitHub Pages needs a public repo).
+2. On GitHub, go to **Settings → Pages**.
 3. Under **Build and deployment → Source**, choose **Deploy from a branch**.
 4. Pick the branch these files live on and the **`/ (root)`** folder, then **Save**.
-5. Wait a minute or two. Your site goes live at:
+5. Wait a minute or two. Your site goes live at
+   `https://<your-username>.github.io/Tunes-to-Know/`.
 
-   ```
-   https://<your-username>.github.io/Tunes-to-Know/
-   ```
-
-Every time you edit `songs.js` and push the change, the live site updates
-automatically.
+Edit `songs.js`, push, and the live site updates automatically.
 
 ---
 
 ## Files
 
-| File          | What it's for                                             |
-| ------------- | --------------------------------------------------------- |
-| `index.html`  | The page structure (header, tabs, footer).                |
-| `styles.css`  | All the styling. Responsive, with automatic light/dark.   |
-| `songs.js`    | **Your songs.** The only file you need to edit.           |
-| `app.js`      | The logic that renders the songs and switches tabs.       |
-| `.nojekyll`   | Tells GitHub Pages to serve the files as-is.              |
+| File          | What it's for                                                  |
+| ------------- | -------------------------------------------------------------- |
+| `index.html`  | Page structure (header, list, footer).                         |
+| `styles.css`  | The dark, Spotify-inspired styling with the orange accent.     |
+| `songs.js`    | **Your songs.** The only file you need to edit.                |
+| `app.js`      | Renders the numbered song list.                                |
+| `.nojekyll`   | Tells GitHub Pages to serve the files as-is.                   |
+
+---
+
+### A note on the tabs
+
+Ultimate Guitar tabs can't be embedded directly (there's no official embed, they block
+being shown inside other sites, and their content isn't ours to copy). So each song links
+out to its tab instead, opening in a new tab.

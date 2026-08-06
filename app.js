@@ -1,130 +1,91 @@
 /* ==========================================================================
- *  Tunes to Know — app logic
- *  Renders the songs from songs.js into the three tabs and handles tab
- *  switching. No dependencies — plain browser JavaScript.
- *  (You normally won't need to edit this file — songs live in songs.js.)
+ *  25 Tunes to Know on Bass — app logic
+ *  Renders the numbered song list from songs.js. Plain browser JavaScript,
+ *  no dependencies. (You normally only edit songs.js.)
  * ========================================================================== */
 
 (function () {
   "use strict";
 
-  var TABS = ["know", "bass", "guitar"];
+  // Small helper: create an element with an optional class and text.
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text != null) node.textContent = text;
+    return node;
+  }
 
-  // Build the Spotify embed URL for a given track id.
   function embedUrl(id) {
     return "https://open.spotify.com/embed/track/" + encodeURIComponent(id) + "?utm_source=generator";
   }
 
-  // Create the DOM for a single song card.
-  function renderSong(song) {
-    var card = document.createElement("article");
-    card.className = "song";
+  // Where the "View tab" button points: a pinned URL if given, else a UG search.
+  function tabUrl(song) {
+    if (song.tab && song.tab.trim()) return song.tab.trim();
+    var query = [song.artist, song.title].filter(Boolean).join(" ") + " bass";
+    return "https://www.ultimate-guitar.com/search.php?search_type=title&value=" + encodeURIComponent(query);
+  }
 
-    // Optional label (title — artist) so the list is easy to scan.
-    var label = [song.title, song.artist].filter(Boolean).join(" — ");
-    if (label) {
-      var meta = document.createElement("span");
-      meta.className = "song-meta";
-      meta.textContent = label;
-      card.appendChild(meta);
+  function renderSong(song, index) {
+    var li = el("li", "song");
+
+    // 1 + 2 + 3: number, name, artist
+    var head = el("div", "song-head");
+    head.appendChild(el("span", "song-num", String(index + 1)));
+    var titles = el("div", "song-titles");
+    titles.appendChild(el("h2", "song-name", song.title || "Untitled"));
+    if (song.artist) titles.appendChild(el("p", "song-artist", song.artist));
+    head.appendChild(titles);
+    li.appendChild(head);
+
+    // 4: "What to know" label + analysis
+    if (song.analysis) {
+      li.appendChild(el("p", "wtk-label", "What to know"));
+      li.appendChild(el("p", "song-analysis", song.analysis));
     }
 
-    if (song.note) {
-      var note = document.createElement("p");
-      note.className = "song-note";
-      note.textContent = song.note;
-      card.appendChild(note);
-    }
-
+    // 5: Spotify player (or a placeholder if no track id yet)
     if (song.id) {
       var iframe = document.createElement("iframe");
       iframe.className = "song-embed";
       iframe.src = embedUrl(song.id);
       iframe.loading = "lazy";
       iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
-      iframe.setAttribute("title", label || "Spotify player");
-      card.appendChild(iframe);
+      iframe.setAttribute("title", (song.title || "This song") + " — Spotify player");
+      li.appendChild(iframe);
     } else {
-      var placeholder = document.createElement("div");
-      placeholder.className = "song-placeholder";
-      placeholder.textContent = "🎵 A Spotify player will appear here once a track link is added.";
-      card.appendChild(placeholder);
+      li.appendChild(el("div", "song-placeholder",
+        "🎵 Spotify player appears here once this song's track link is added."));
     }
 
-    return card;
+    // 6: link out to the tab on Ultimate Guitar
+    var tab = el("a", "btn btn-tab", "View tab on Ultimate Guitar ↗");
+    tab.href = tabUrl(song);
+    tab.target = "_blank";
+    tab.rel = "noopener";
+    li.appendChild(tab);
+
+    return li;
   }
 
-  // Fill every panel with its songs.
-  function renderAll() {
-    var data = (typeof SONGS !== "undefined" && SONGS) || {};
-    TABS.forEach(function (key) {
-      var panel = document.getElementById("panel-" + key);
-      if (!panel) return;
-      var list = data[key] || [];
-      panel.innerHTML = "";
-      if (!list.length) {
-        var empty = document.createElement("p");
-        empty.className = "empty";
-        empty.textContent = "No songs here yet — check back soon.";
-        panel.appendChild(empty);
-        return;
-      }
-      list.forEach(function (song) {
-        panel.appendChild(renderSong(song));
-      });
-    });
-  }
+  function render() {
+    var songs = (typeof SONGS !== "undefined" && SONGS) || [];
 
-  // Show one tab, hide the others; optionally update the URL hash.
-  function selectTab(key, updateHash) {
-    if (TABS.indexOf(key) === -1) key = "know";
-    TABS.forEach(function (k) {
-      var btn = document.getElementById("tab-" + k);
-      var panel = document.getElementById("panel-" + k);
-      var isActive = k === key;
-      if (btn) btn.setAttribute("aria-selected", isActive ? "true" : "false");
-      if (panel) panel.hidden = !isActive;
-    });
-    if (updateHash) {
-      if (window.history && history.replaceState) history.replaceState(null, "", "#" + key);
-      else location.hash = key;
+    var list = document.getElementById("song-list");
+    if (list) {
+      list.innerHTML = "";
+      songs.forEach(function (song, i) { list.appendChild(renderSong(song, i)); });
+    }
+
+    var count = document.getElementById("song-count");
+    if (count) count.textContent = songs.length + (songs.length === 1 ? " song" : " songs");
+
+    var playlist = document.getElementById("playlist-link");
+    if (playlist) {
+      if (typeof PLAYLIST_URL !== "undefined" && PLAYLIST_URL) playlist.href = PLAYLIST_URL;
+      else playlist.style.display = "none";
     }
   }
 
-  function currentTabFromHash() {
-    var key = (location.hash || "").replace("#", "");
-    return TABS.indexOf(key) !== -1 ? key : "know";
-  }
-
-  // Wire up clicks + left/right arrow keys on the tab bar.
-  function initTabs() {
-    TABS.forEach(function (key) {
-      var btn = document.getElementById("tab-" + key);
-      if (!btn) return;
-      btn.addEventListener("click", function () {
-        selectTab(key, true);
-      });
-      btn.addEventListener("keydown", function (e) {
-        var i = TABS.indexOf(key);
-        var next = null;
-        if (e.key === "ArrowRight") next = TABS[(i + 1) % TABS.length];
-        else if (e.key === "ArrowLeft") next = TABS[(i - 1 + TABS.length) % TABS.length];
-        if (next) {
-          e.preventDefault();
-          selectTab(next, true);
-          var nextBtn = document.getElementById("tab-" + next);
-          if (nextBtn) nextBtn.focus();
-        }
-      });
-    });
-    window.addEventListener("hashchange", function () {
-      selectTab(currentTabFromHash(), false);
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    renderAll();
-    initTabs();
-    selectTab(currentTabFromHash(), false);
-  });
+  document.addEventListener("DOMContentLoaded", render);
 })();
