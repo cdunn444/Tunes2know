@@ -68,17 +68,68 @@
     return li;
   }
 
+  // Draw a small chord diagram (nut, 3 frets, 6 strings) as an inline SVG.
+  // frets: low E → high e; -1 = don't play, 0 = open, 1+ = fret number.
+  function chordDiagram(frets) {
+    var NS = "http://www.w3.org/2000/svg";
+    var W = 104, H = 122, LEFT = 12, GAP = 16;          // string geometry
+    var NUT_Y = 16, TOP = 21, FRET_H = 24;              // fret geometry
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.setAttribute("class", "chord-svg");
+    svg.setAttribute("aria-hidden", "true");
+
+    function shape(tag, attrs) {
+      var node = document.createElementNS(NS, tag);
+      for (var k in attrs) node.setAttribute(k, attrs[k]);
+      svg.appendChild(node);
+      return node;
+    }
+
+    // Nut (thick bar), fret lines, strings
+    shape("rect", { x: LEFT - 1, y: NUT_Y, width: GAP * 5 + 2, height: 4, rx: 1, "class": "cd-nut" });
+    for (var f = 1; f <= 4; f++) {
+      shape("line", { x1: LEFT, y1: TOP + f * FRET_H, x2: LEFT + GAP * 5, y2: TOP + f * FRET_H, "class": "cd-line" });
+    }
+    for (var s = 0; s < 6; s++) {
+      shape("line", { x1: LEFT + s * GAP, y1: NUT_Y, x2: LEFT + s * GAP, y2: TOP + 4 * FRET_H, "class": "cd-line" });
+    }
+
+    // Per-string markers: x (muted), o (open), or a dot on the fret
+    frets.forEach(function (fret, i) {
+      var x = LEFT + i * GAP;
+      if (fret < 0) {
+        var t = shape("text", { x: x, y: 11, "class": "cd-mark" });
+        t.textContent = "×";
+      } else if (fret === 0) {
+        shape("circle", { cx: x, cy: 8, r: 3.4, "class": "cd-open" });
+      } else {
+        shape("circle", { cx: x, cy: TOP + (fret - 0.5) * FRET_H, r: 6.5, "class": "cd-dot" });
+      }
+    });
+
+    return svg;
+  }
+
   // Optional per-side intro card (e.g. the guitar chord primer).
   function renderIntro(intro) {
     var li = el("li", "song intro-card");
     if (intro.title) li.appendChild(el("h2", "intro-title", intro.title));
     if (intro.text) li.appendChild(el("p", "song-analysis", intro.text));
     if (intro.chords && intro.chords.length) {
-      var row = el("div", "chord-row");
+      var grid = el("div", "chord-grid");
       intro.chords.forEach(function (chord) {
-        row.appendChild(el("span", "chord", chord));
+        if (chord && chord.frets) {
+          var card = el("div", "chord-card");
+          card.appendChild(el("span", "chord-name", chord.name));
+          card.appendChild(chordDiagram(chord.frets));
+          grid.appendChild(card);
+        } else {
+          // Fallback: a plain chip for entries without fingering data.
+          grid.appendChild(el("span", "chord", chord.name || String(chord)));
+        }
       });
-      li.appendChild(row);
+      li.appendChild(grid);
     }
     return li;
   }

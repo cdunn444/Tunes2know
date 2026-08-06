@@ -118,11 +118,22 @@ const SECTIONS = {
     tabLabel: "Side B · Guitar",
     subhead: "Turn up the volume to 11 with these classic guitar tracks. Learn a handful of chords and you'll be able to play most songs out there!",
     playlist: "",
-    /* Shown as a card above the songs on this side. */
+    /* Shown as a card above the songs on this side.
+       Each chord's frets are low E → high e: -1 = don't play, 0 = open string,
+       1+ = fret number. These draw the mini chord diagrams. */
     intro: {
       title: "Start here: lock down these chords",
       text: "Get these eight under your fingers and you've unlocked about 90% of the songs out there — including most of the list below.",
-      chords: ["G", "C", "D", "Em", "Am", "A", "E", "Dm"],
+      chords: [
+        { name: "G",  frets: [3, 2, 0, 0, 0, 3] },
+        { name: "C",  frets: [-1, 3, 2, 0, 1, 0] },
+        { name: "D",  frets: [-1, -1, 0, 2, 3, 2] },
+        { name: "Em", frets: [0, 2, 2, 0, 0, 0] },
+        { name: "Am", frets: [-1, 0, 2, 2, 1, 0] },
+        { name: "A",  frets: [-1, 0, 2, 2, 2, 0] },
+        { name: "E",  frets: [0, 2, 2, 1, 0, 0] },
+        { name: "Dm", frets: [-1, -1, 0, 2, 3, 1] },
+      ],
     },
     songs: Array.from({ length: 25 }, function (_, i) {
       return {

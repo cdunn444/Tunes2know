@@ -233,12 +233,36 @@ a { color: inherit; }
   font-family: var(--font-display);
   font-size: 1.35rem; font-weight: 400; letter-spacing: .01em; line-height: 1.2;
 }
-.chord-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-  margin-top: .35rem;
+.chord-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: .6rem;
+  margin-top: .5rem;
 }
+.chord-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .1rem;
+  padding: .55rem .35rem .45rem;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+}
+.chord-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--accent-2);
+  line-height: 1;
+}
+.chord-svg { width: 78px; height: auto; display: block; }
+.cd-line { stroke: rgba(255, 255, 255, 0.35); stroke-width: 1; }
+.cd-nut { fill: rgba(255, 255, 255, 0.75); }
+.cd-dot { fill: var(--accent-2); }
+.cd-open { fill: none; stroke: var(--text-muted); stroke-width: 1.5; }
+.cd-mark { fill: var(--text-muted); font: 10px sans-serif; text-anchor: middle; }
+
+/* Fallback chip for chords without fingering data */
 .chord {
   display: inline-flex;
   align-items: center;
