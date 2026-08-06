@@ -31,7 +31,6 @@ const SECTIONS = {
   /* ---- Side A · Bass ----------------------------------------------------- */
   bass: {
     tabLabel: "Side A · Bass",
-    title: "25 Tunes to Know (on Bass)",
     subhead: "Master your bass face while learning these essential grooves. Some are hard to learn but all are fun to play!",
     playlist: "https://open.spotify.com/playlist/6DWblW9d44zSp3zHBcA3KR",
     songs: [
@@ -117,8 +116,7 @@ const SECTIONS = {
      as the bass list above), and add the guitar playlist URL. */
   guitar: {
     tabLabel: "Side B · Guitar",
-    title: "25 Tunes to Know (on Guitar)",
-    subhead: "Master your guitar face while learning these essential riffs. Some are hard to learn but all are fun to play!",
+    subhead: "Turn up the volume to 11 with these classic guitar tracks. Learn a handful of chords and you'll be able to play most songs out there!",
     playlist: "",
     songs: Array.from({ length: 25 }, function (_, i) {
       return {

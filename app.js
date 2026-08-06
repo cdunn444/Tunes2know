@@ -99,11 +99,6 @@
       if (panel) panel.hidden = !isActive;
     });
 
-    var title = document.getElementById("site-title");
-    if (title && section.title) {
-      title.textContent = section.title;
-      document.title = section.title;
-    }
     var subhead = document.getElementById("site-subhead");
     if (subhead && section.subhead) subhead.textContent = section.subhead;
 

@@ -87,7 +87,7 @@ a { color: inherit; }
 /* ---- Header (Spotify playlist-page vibe) -------------------------------- */
 /* (the orange glow behind it lives on body::before, fixed to the viewport) */
 .site-header {
-  padding: 3.25rem 1.25rem 1.75rem;
+  padding: 2rem 1.25rem 1.75rem;
 }
 .header-inner { max-width: var(--max-width); margin: 0 auto; text-align: center; }
 .site-title {
@@ -132,7 +132,7 @@ a { color: inherit; }
   display: flex;
   justify-content: center;
   padding: 0 1rem;
-  margin: .25rem 0 1.25rem;
+  margin: 1.1rem 0 0;
 }
 .seg {
   display: flex;
