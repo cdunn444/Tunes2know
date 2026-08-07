@@ -39,7 +39,7 @@
   --on-accent: #10121a;      /* near-black text on accent backgrounds */
   --border: #2a2e3b;
   --radius: 12px;
-  --max-width: 720px;
+  --max-width: 768px;   /* content column cap on desktop */
 }
 
 * { box-sizing: border-box; }
