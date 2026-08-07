@@ -66,7 +66,10 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  width: min(78vw, 540px);
+  /* Reaches from the corner to ~540px past the content column's left edge,
+     so the pool still sits behind the record on a wide monitor. On phones
+     the second term is the smaller one and nothing changes. */
+  width: min(78vw, calc(50vw - (var(--max-width) / 2) + 540px));
   height: min(58vh, 480px);
   background: radial-gradient(120% 120% at 0% 0%,
     rgba(157, 94, 255, 0.34) 0%,
@@ -135,8 +138,11 @@ a { color: inherit; }
   z-index: 20;
   display: flex;
   justify-content: flex-start;
+  /* Same column as the content, so on a big screen the record lines up
+     with the cards' left edge instead of drifting off to the corner. */
+  max-width: var(--max-width);
+  margin: 1.1rem auto 0;
   padding: 0 1.25rem;
-  margin: 1.1rem 0 0;
 }
 .switch-stage {
   position: relative;
@@ -204,7 +210,6 @@ a { color: inherit; }
 
 /* Very narrow phones: slim the pills so all three fit beside the record. */
 @media (max-width: 374px) {
-  .switcher { padding: 0 1rem; }
   .switch-stage [role="tablist"] { left: calc(100% + 10px); gap: .4rem; }
   .side-option { font-size: .84rem; padding: .45rem .85rem; min-height: 38px; }
 }
