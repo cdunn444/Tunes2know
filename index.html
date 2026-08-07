@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>25 Tunes to Know</title>
-  <meta name="description" content="Master your bass face while learning 25 essential grooves: why each matters, the track to hear it, and a link to the tab." />
+  <meta name="description" content="25 classic guitar tracks, 25 essential basslines, and 25 artists to know: why each matters, the track to hear it, and a link to the tab." />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#15171e" />
   <link rel="icon" href="data:image/svg+xml,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22><text%20y=%22.9em%22%20font-size=%2290%22>&#127928;</text></svg>" />
@@ -17,12 +17,12 @@
     <div class="switch-stage" id="switch-stage" data-state="open">
       <button class="record" id="record-toggle" aria-expanded="true" aria-label="Menu">
         <span class="record-disc">
-          <span class="record-label"><span class="record-letter" id="record-letter">B</span></span>
+          <span class="record-label"><span class="record-letter" id="record-letter">A</span></span>
         </span>
       </button>
       <div role="tablist" aria-label="Pages">
-        <button class="side-option" role="tab" id="tab-guitar" aria-controls="panel-guitar" aria-selected="false">Guitar</button>
-        <button class="side-option" role="tab" id="tab-bass" aria-controls="panel-bass" aria-selected="true">Bass</button>
+        <button class="side-option" role="tab" id="tab-guitar" aria-controls="panel-guitar" aria-selected="true">Guitar</button>
+        <button class="side-option" role="tab" id="tab-bass" aria-controls="panel-bass" aria-selected="false">Bass</button>
         <button class="side-option" role="tab" id="tab-artists" aria-controls="panel-artists" aria-selected="false">Artists</button>
       </div>
     </div>
@@ -31,7 +31,7 @@
   <header class="site-header">
     <div class="header-inner">
       <h1 class="site-title" id="site-title">25 Tunes to Know</h1>
-      <p class="site-subtitle" id="site-subhead">Master your bass face while learning these essential grooves. Some are hard to learn but all are fun to play!</p>
+      <p class="site-subtitle" id="site-subhead">Turn up the volume to 11 with these classic guitar tracks. Learn a handful of chords and you'll be able to play most songs out there!</p>
       <div class="header-actions">
         <a class="btn btn-accent" id="playlist-link" href="#" target="_blank" rel="noopener">▶ Open full playlist in Spotify</a>
       </div>
@@ -39,8 +39,8 @@
   </header>
 
   <main class="content">
-    <ol class="song-list" role="tabpanel" id="panel-bass" aria-labelledby="tab-bass"></ol>
-    <ol class="song-list" role="tabpanel" id="panel-guitar" aria-labelledby="tab-guitar" hidden></ol>
+    <ol class="song-list" role="tabpanel" id="panel-guitar" aria-labelledby="tab-guitar"></ol>
+    <ol class="song-list" role="tabpanel" id="panel-bass" aria-labelledby="tab-bass" hidden></ol>
     <ol class="song-list" role="tabpanel" id="panel-artists" aria-labelledby="tab-artists" hidden></ol>
     <noscript><p class="empty">Please enable JavaScript to see the songs.</p></noscript>
   </main>

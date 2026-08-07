@@ -8,7 +8,7 @@
 (function () {
   "use strict";
 
-  var KEYS = ["bass", "guitar", "artists"];
+  var KEYS = ["guitar", "bass", "artists"]; // menu order; first one is the default page
 
   // What the record's label wears per page: vinyl sides for the
   // instruments, a star for the artists.
@@ -166,7 +166,7 @@
 
   // Show one page: swap tabs, panels, headline, subhead, and playlist button.
   function selectSection(key, updateHash) {
-    if (KEYS.indexOf(key) === -1) key = "bass";
+    if (KEYS.indexOf(key) === -1) key = KEYS[0];
     var section = (typeof SECTIONS !== "undefined" && SECTIONS[key]) || {};
 
     KEYS.forEach(function (k) {
@@ -209,7 +209,7 @@
 
   function currentFromHash() {
     var key = (location.hash || "").replace("#", "");
-    return KEYS.indexOf(key) !== -1 ? key : "bass";
+    return KEYS.indexOf(key) !== -1 ? key : KEYS[0];
   }
 
   /* --- The record menu ---------------------------------------------------
@@ -225,7 +225,7 @@
       var btn = document.getElementById("tab-" + KEYS[i]);
       if (btn && btn.getAttribute("aria-selected") === "true") return KEYS[i];
     }
-    return "bass";
+    return KEYS[0];
   }
 
   function initRecord() {
@@ -235,7 +235,7 @@
     if (!stage || !record || !letter) return;
 
     function sync() {
-      letter.textContent = LETTERS[currentKey()] || "B";
+      letter.textContent = LETTERS[currentKey()] || LETTERS[KEYS[0]];
     }
 
     function setOpen(open) {
