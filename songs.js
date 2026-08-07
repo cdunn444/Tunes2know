@@ -158,7 +158,7 @@ const SECTIONS = {
         analysis: "The campfire classic: capo on, keep two fingers planted, and let the top strings ring through every chord. It's the payoff for learning Em, G, D, and A.", tab: "" },
 
       { id: "7iN1s7xHE4ifF5povM6A48", title: "Let It Be", artist: "The Beatles",
-        analysis: "C, G, Am, F: the four-chord progression that powers half of popular music, in its most famous form. Proof that the primer chords above really do unlock everything.", tab: "" },
+        analysis: "C, G, Am, F: the four-chord progression that powers half of popular music, in its most famous form. The Beatles are the foundation modern music is built on, so don't just learn a song or two. Study their songwriting patterns and you'll start hearing them in everything else you play.", tab: "" },
 
       { id: "5jgFfDIR6FR0gvlA56Nakr", title: "Blackbird", artist: "The Beatles",
         analysis: "McCartney's fingerpicking étude. Two moving voices over an open-string drone. Slow at first, hypnotic once it flows, and gorgeous forever after.", tab: "" },
