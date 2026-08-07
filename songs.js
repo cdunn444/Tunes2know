@@ -259,6 +259,9 @@ const SECTIONS = {
       { id: "2sG4zTOLvjKG1PSoOyf5Ej", title: "Brandi Carlile",
         analysis: "A voice that cracks exactly where the song needs it to. She's also the one who championed Joni Mitchell back onto the stage. Start with 'The Story' and 'The Joke.'" },
 
+      { id: "4LEiUm1SRbFMgfqnQTwUbQ", title: "Bon Iver",
+        analysis: "Justin Vernon is another sad boy singer songwriter playing acoustic guitar from a cold state (Wisconsin instead of Vermont). He's less pop than Noah but equally as introspective. One winter in a cabin became For Emma, Forever Ago, and years later he was folklore-era Taylor's duet partner on 'exile.' Start with 'Skinny Love' and 'Holocene.'" },
+
       { id: "3Q8wgwyVVv0z4UEh1HB0KY", title: "Jason Isbell",
         analysis: "Modern Americana's gold standard for turning hard truths into gorgeous lines. Start with 'Cover Me Up' and 'If We Were Vampires.' Fair warning, that second one is a weeper." },
 
@@ -270,9 +273,6 @@ const SECTIONS = {
 
       { id: "70kkdajctXSbqSMJbQO424", title: "Kacey Musgraves",
         analysis: "Country roots with a pop shimmer. On Golden Hour she basically invented her own weather. Start with 'Slow Burn' and 'Rainbow.'" },
-
-      { id: "4LEiUm1SRbFMgfqnQTwUbQ", title: "Bon Iver",
-        analysis: "One winter in a cabin became For Emma, Forever Ago; years later he's folklore-era Taylor's duet partner on 'exile.' Start with 'Skinny Love' and 'Holocene.'" },
 
       { id: "3gd8FJtBJtkRxdfbTu19U2", title: "Mumford & Sons",
         analysis: "The banjo-driven stomp that kicked the folk revival into stadiums and set the table for Noah Kahan. Start with 'The Cave' and 'I Will Wait.'" },
