@@ -264,8 +264,8 @@ const SECTIONS = {
       { id: "3Q8wgwyVVv0z4UEh1HB0KY", title: "Jason Isbell",
         analysis: "Modern Americana's gold standard for turning hard truths into gorgeous lines. Start with 'Cover Me Up' and 'If We Were Vampires.' Fair warning, that second one is a weeper." },
 
-      { id: "4YLtscXsxbVgi031ovDDdh", title: "Chris Stapleton",
-        analysis: "He spent a decade writing songs for other Nashville acts before that once-in-a-generation voice put him out front. Start with 'Tennessee Whiskey' and 'Starting Over.'" },
+      { id: "5sXaGoRLSpd7VeyZrLkKwt", title: "Gregory Alan Isakov",
+        analysis: "Hushed, starlit folk from a songwriter who farms vegetables between tours. Start with 'Big Black Car' and 'The Stable Song.'" },
 
       { id: "13ZEDW6vyBF12HYcZRr4EV", title: "Tyler Childers",
         analysis: "Appalachian fiddle-and-holler with a poet's pen. It's the raw end of the sound Zach Bryan runs with. Start with 'Feathered Indians' and 'All Your'n.'" },
