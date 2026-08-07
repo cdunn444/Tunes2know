@@ -142,7 +142,7 @@ a { color: inherit; }
      with the cards' left edge instead of drifting off to the corner. */
   max-width: var(--max-width);
   margin: 1.1rem auto 0;
-  padding: 0 1.25rem;
+  padding: 0 2rem;
 }
 .switch-stage {
   position: relative;
@@ -210,6 +210,7 @@ a { color: inherit; }
 
 /* Very narrow phones: slim the pills so all three fit beside the record. */
 @media (max-width: 374px) {
+  .switcher { padding: 0 1.25rem; } /* 2rem would push the last pill off-screen */
   .switch-stage [role="tablist"] { left: calc(100% + 10px); gap: .4rem; }
   .side-option { font-size: .84rem; padding: .45rem .85rem; min-height: 38px; }
 }
