@@ -291,8 +291,8 @@
       swapTimer = setTimeout(function () {
         body.classList.remove("page-enter-active");
         swapTimer = null;
-      }, 400);
-    }, 170);
+      }, 440);
+    }, 300);
   }
 
   function initTabs() {
