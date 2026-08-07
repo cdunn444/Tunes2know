@@ -187,8 +187,8 @@ const SECTIONS = {
       { id: "7yq4Qj7cqayVTp3FF9CWbm", title: "Riptide", artist: "Vance Joy",
         analysis: "Am, G, C around and around with a bouncy strum. Three primer chords and you're playing the whole song tonight. Instant-gratification fuel for practice.", tab: "" },
 
-      { id: "2ihCaVdNZmnHZWt0fvAM7B", title: "Little Talks", artist: "Of Monsters and Men",
-        analysis: "Simple chords driven by dynamics: soft picking in the verses, big stabs on the horn hits. A fun study in making acoustic strumming feel like a full band.", tab: "" },
+      { id: "2PzU4IB8Dr6mxV3lHuaG34", title: "(I Can't Get No) Satisfaction", artist: "The Rolling Stones",
+        analysis: "The fuzzy three-note riff Keith Richards famously dreamed up in his sleep and caught on a bedside cassette recorder. It's the first riff every electric player learns, and it still sounds a little dangerous.", tab: "" },
 
       { id: "1Y373MqadDRtclJNdnUXVc", title: "Paranoid", artist: "Black Sabbath",
         analysis: "The galloping power-chord riff that basically invented metal rhythm guitar. Builds downpicking stamina fast, and it sounds great even played slowly.", tab: "" },
