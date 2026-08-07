@@ -209,6 +209,31 @@ a { color: inherit; }
   .side-option { font-size: .84rem; padding: .45rem .85rem; min-height: 38px; }
 }
 
+/* ---- Page swap ----------------------------------------------------------- */
+/* Picking a page borrows the menu's motion: the old content sinks and
+   fades, then a beat later the new page rises in. The record menu itself
+   sits outside these wrappers, so it never fades. */
+body.page-leave .site-header,
+body.page-leave .content {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .16s ease-in, transform .16s ease-in;
+  pointer-events: none;
+}
+body.page-enter .site-header,
+body.page-enter .content {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: none;
+}
+body.page-enter-active .site-header,
+body.page-enter-active .content {
+  opacity: 1;
+  transform: none;
+  transition: opacity .26s ease-out, transform .26s cubic-bezier(.2, .8, .3, 1.05);
+  transition-delay: .06s, .06s;
+}
+
 /* The record: vinyl grooves, a lavender label bearing the side letter,
    spinning slowly like it's on a turntable. */
 .record {

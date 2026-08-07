@@ -257,13 +257,50 @@
     recordCtl = { sync: sync };
   }
 
+  /* Picking a page runs a two-phase swap that mirrors the menu's motion:
+     the old content sinks and fades out, the swap happens while the page
+     is invisible (which also hides the jump back to the top), then the new
+     content rises in a beat later. Reduced-motion users get an instant swap. */
+  var swapTimer = null;
+
+  function animatedSelect(key) {
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced || key === currentKey()) {
+      // Instant path. Cancel any in-flight swap so an earlier pick can't
+      // land after this one and steal the page.
+      if (swapTimer) { clearTimeout(swapTimer); swapTimer = null; }
+      document.body.classList.remove("page-leave", "page-enter", "page-enter-active");
+      selectSection(key, true);
+      if (recordCtl) recordCtl.sync();
+      return;
+    }
+
+    var body = document.body;
+    if (swapTimer) clearTimeout(swapTimer);
+    body.classList.remove("page-enter", "page-enter-active");
+    body.classList.add("page-leave");
+
+    swapTimer = setTimeout(function () {
+      selectSection(key, true);
+      if (recordCtl) recordCtl.sync();
+      body.classList.remove("page-leave");
+      body.classList.add("page-enter");
+      void body.offsetHeight; // flush styles so the hidden start state lands
+      body.classList.add("page-enter-active");
+      body.classList.remove("page-enter");
+      swapTimer = setTimeout(function () {
+        body.classList.remove("page-enter-active");
+        swapTimer = null;
+      }, 400);
+    }, 170);
+  }
+
   function initTabs() {
     KEYS.forEach(function (key) {
       var btn = document.getElementById("tab-" + key);
       if (!btn) return;
       btn.addEventListener("click", function () {
-        selectSection(key, true);
-        if (recordCtl) recordCtl.sync();
+        animatedSelect(key);
       });
       btn.addEventListener("keydown", function (e) {
         var i = KEYS.indexOf(key);
@@ -272,8 +309,7 @@
         else if (e.key === "ArrowLeft") next = KEYS[(i - 1 + KEYS.length) % KEYS.length];
         if (next) {
           e.preventDefault();
-          selectSection(next, true);
-          if (recordCtl) recordCtl.sync();
+          animatedSelect(next);
           var nextBtn = document.getElementById("tab-" + next);
           if (nextBtn) nextBtn.focus();
         }
