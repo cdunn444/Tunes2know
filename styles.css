@@ -2,7 +2,7 @@
    25 Tunes to Know
    A dark UI inspired by Spotify: deep blue-charcoal with an electric
    violet accent.
-   Fonts: Ranchers (headlines) + DM Sans (body) — Google Fonts, self-hosted
+   Fonts: Ranchers (headlines) + DM Sans (body), Google Fonts, self-hosted
    from /fonts so the site has no third-party requests.
    ========================================================================== */
 
@@ -17,7 +17,7 @@
 @font-face {
   font-family: "DM Sans";
   font-style: normal;
-  font-weight: 400 700; /* variable font — covers regular through bold */
+  font-weight: 400 700; /* variable font: covers regular through bold */
   font-display: swap;
   src: url("fonts/dm-sans-latin.woff2") format("woff2");
 }
@@ -33,9 +33,9 @@
   --text: #ffffff;
   --text-muted: #aab1c2;     /* cool gray, matches the charcoal's undertone */
   --text-soft: #d6dae3;
-  --accent: #9d5eff;         /* electric violet — reserved for CTAs (buttons) */
+  --accent: #9d5eff;         /* electric violet, reserved for CTAs (buttons) */
   --accent-hover: #ae7bff;
-  --accent-2: #c7b3ff;       /* soft lavender — non-CTA accents (badges, labels) */
+  --accent-2: #c7b3ff;       /* soft lavender, non-CTA accents (badges, labels) */
   --on-accent: #10121a;      /* near-black text on accent backgrounds */
   --border: #2a2e3b;
   --radius: 12px;
@@ -58,8 +58,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Ambient orange glow pooled in the top-left corner, behind the record
-   logo — fixed to the viewport, so it stays put while content scrolls
+/* Ambient violet glow pooled in the top-left corner, behind the record
+   logo, fixed to the viewport so it stays put while content scrolls
    over it. Sits behind everything (z-index 0 vs 1). */
 body::before {
   content: "";
@@ -87,7 +87,7 @@ img, iframe { max-width: 100%; }
 a { color: inherit; }
 
 /* ---- Header (Spotify playlist-page vibe) -------------------------------- */
-/* (the orange glow behind it lives on body::before, fixed to the viewport) */
+/* (the violet glow behind it lives on body::before, fixed to the viewport) */
 .site-header {
   padding: 2rem 1.25rem 1.75rem;
 }
@@ -95,8 +95,8 @@ a { color: inherit; }
 .site-title {
   margin: 0 0 .6rem;
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 8.8vw, 4rem); /* Ranchers runs narrow — scale up for punch */
-  font-weight: 400; /* Sigmar ships a single (very chunky) weight */
+  font-size: clamp(2.6rem, 8.8vw, 4rem); /* Ranchers runs narrow, so scale up for punch */
+  font-weight: 400; /* Ranchers ships a single weight */
   letter-spacing: .01em;
   line-height: 1.15;
 }
@@ -209,7 +209,7 @@ a { color: inherit; }
   .side-option { font-size: .84rem; padding: .45rem .85rem; min-height: 38px; }
 }
 
-/* The record: warm vinyl grooves, a tan label bearing the side letter,
+/* The record: vinyl grooves, a lavender label bearing the side letter,
    spinning slowly like it's on a turntable. */
 .record {
   width: 60px;

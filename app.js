@@ -1,5 +1,5 @@
 /* ==========================================================================
- *  25 Tunes to Know — app logic
+ *  25 Tunes to Know app logic
  *  Renders both sides (bass / guitar) from songs.js and handles the
  *  Side A/B switcher. Plain browser JavaScript, no dependencies.
  *  (You normally only edit songs.js.)
@@ -61,7 +61,7 @@
       iframe.src = isArtist ? artistEmbedUrl(song.id) : embedUrl(song.id);
       iframe.loading = "lazy";
       iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
-      iframe.setAttribute("title", (song.title || "This") + " — Spotify player");
+      iframe.setAttribute("title", (song.title || "This") + " on Spotify");
       li.appendChild(iframe);
     } else {
       li.appendChild(el("div", "song-placeholder",
@@ -157,7 +157,7 @@
       if (section.intro) panel.appendChild(renderIntro(section.intro));
       var list = section.songs || [];
       if (!list.length) {
-        panel.appendChild(el("p", "empty", "No songs here yet — check back soon."));
+        panel.appendChild(el("p", "empty", "No songs here yet. Check back soon."));
         return;
       }
       list.forEach(function (song, i) { panel.appendChild(renderSong(song, i, key)); });
@@ -196,7 +196,7 @@
     }
 
     if (updateHash) {
-      // A picked page starts from its top. The jump must be instant — a
+      // A picked page starts from its top. The jump must be instant: a
       // smooth scroll would stream scroll events past the record menu's
       // close-on-scroll handler and shut it. ("instant" also overrides the
       // site's CSS smooth-scrolling; ancient browsers fall through.)
