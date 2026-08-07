@@ -222,7 +222,7 @@ const SECTIONS = {
   artists: {
     tabLabel: "Artists",
     headline: "25 Artists to Know",
-    subhead: "The family tree of the music you already love — folk roots at the top, the newest storytellers at the bottom. If Stick Season is on repeat, start digging!",
+    subhead: "The family tree of your favorite artists. This list is dedicated to singer songwriters like yourself. You don't have to like all their music but you should understand and appreciate what makes them great.",
     playlist: "",
     songs: [
       { id: "74ASZWbe4lXaubB36ztrGX", title: "Bob Dylan",
