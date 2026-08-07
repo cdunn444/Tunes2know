@@ -258,14 +258,14 @@ const SECTIONS = {
       { id: "7oPgCQqMMXEXrNau5vxYZP", title: "Tracy Chapman",
         analysis: "Proof that one voice and one guitar can stop a room mid-sentence. 'Fast Car' just did it again for a whole new generation. Start there, then 'Give Me One Reason.'" },
 
-      { id: "25IG9fa7cbdmCIy3OnuH57", title: "The Chicks",
-        analysis: "Fearless country storytelling with sibling-tight harmonies. They're the bridge from Dolly to Taylor, who pulled them onto 'Soon You'll Get Better.' Start with 'Cowboy Take Me Away' and 'Wide Open Spaces.'" },
-
       { id: "2sG4zTOLvjKG1PSoOyf5Ej", title: "Brandi Carlile",
         analysis: "A voice that cracks exactly where the song needs it to. She's also the one who championed Joni Mitchell back onto the stage. Start with 'The Story' and 'The Joke.'" },
 
       { id: "3Q8wgwyVVv0z4UEh1HB0KY", title: "Jason Isbell",
         analysis: "Modern Americana's gold standard for turning hard truths into gorgeous lines. Start with 'Cover Me Up' and 'If We Were Vampires.' Fair warning, that second one is a weeper." },
+
+      { id: "4YLtscXsxbVgi031ovDDdh", title: "Chris Stapleton",
+        analysis: "He spent a decade writing songs for other Nashville acts before that once-in-a-generation voice put him out front. Start with 'Tennessee Whiskey' and 'Starting Over.'" },
 
       { id: "13ZEDW6vyBF12HYcZRr4EV", title: "Tyler Childers",
         analysis: "Appalachian fiddle-and-holler with a poet's pen. It's the raw end of the sound Zach Bryan runs with. Start with 'Feathered Indians' and 'All Your'n.'" },
